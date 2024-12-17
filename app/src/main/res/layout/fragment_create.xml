@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/bg_dark"
+    android:orientation="vertical"
+    tools:context=".activity.MainActivity"
+    tools:ignore="ExtraText">
+
+    <!-- Sezione caricamento foto -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/uploadPhotoLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Creazione evento"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
+
+        <!-- Button per selezionare la foto -->
+        <EditText
+            android:id="@+id/uploadPhotoInput"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="20dp"
+            android:background="@color/bg_dark_2"
+            android:drawableStart="@drawable/ic_upload_here"
+            android:drawablePadding="10dp"
+            android:padding="15dp"
+            android:text="Carica foto"
+            android:textColor="@color/txt_placeholder" />
+
+        <!-- Titolo -->
+        <TextView
+            android:id="@+id/titleLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Titolo"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/titleInput"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="titolo"
+            android:textColorHint="@color/txt_placeholder"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:background="@color/bg_dark_2"
+            android:padding="10dp"/>
+
+        <!-- Data -->
+        <TextView
+            android:id="@+id/dateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/dateInput"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="seleziona data"
+            android:textColorHint="@color/txt_placeholder"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:background="@color/bg_dark_2"
+            android:padding="10dp"
+            android:focusable="false"
+            android:clickable="true"
+            android:inputType="none"
+            tools:ignore="TextFields" />
+
+        <!-- Indirizzo -->
+        <TextView
+            android:id="@+id/addressLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Indirizzo"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            tools:ignore="DuplicateIds" />
+
+        <EditText
+            android:id="@+id/addressInput"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="indirizzo"
+            android:textColorHint="@color/txt_placeholder"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:background="@color/bg_dark_2"
+            android:padding="10dp"
+            tools:ignore="DuplicateIds" />
+
+        <!-- Descrizione -->
+        <TextView
+            android:id="@+id/descriptionLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descrizione"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            tools:ignore="DuplicateIds" />
+
+        <EditText
+            android:id="@+id/descriptionInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Scrivi qui..."
+            android:textColorHint="@color/txt_placeholder"
+            android:textColor="@color/txt_darkmode"
+            android:textSize="18sp"
+            android:background="@color/bg_dark_2"
+            android:padding="10dp"
+            android:lines="4"
+            android:gravity="top|start"
+            tools:ignore="DuplicateIds" />
+
+    </LinearLayout>
+
+    <!-- Bottone "Crea" in basso a destra -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="30dp"
+        android:paddingEnd="20dp">
+
+        <Button
+            android:id="@+id/createButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:text="Crea"
+            android:textColor="@color/txt_darkmode"
+            android:drawableRight="@drawable/ic_upload"
+            android:drawablePadding="10dp"
+            android:padding="15dp"/>
+
+    </LinearLayout>
+
+</FrameLayout>
