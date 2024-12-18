@@ -14,7 +14,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_dark_2"
+        android:background="@color/bg_dark"
         android:orientation="horizontal">
 
             <ImageView
@@ -29,25 +29,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:orientation="horizontal"
+        android:background="@color/bg_dark"
         android:padding="10dp"
         android:weightSum="100">
 
-        <!--searchbar-->
-
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/bg_dark_2"
-                android:queryHint="@string/search"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/recycler_view"
-                />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/txt_darkmode"
+            android:layout_weight="20"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:text="@string/Events" />
 
         <Space
             android:layout_width="0dp"
@@ -59,16 +52,17 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_dark_2"
+        android:background="@color/bg_dark"
         android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/recycler_event_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"/>
+
 
     </FrameLayout>
 

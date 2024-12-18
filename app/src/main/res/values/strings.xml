@@ -26,4 +26,9 @@
     <string name="event_date">01/01/2025</string>
     <string name="event_user_creator">User Creator\n</string>
     <string name="title_event">Event</string>
+    <string name="Events">Events</string>
+    <string name="food_name">Food name</string>
+    <string name="food_state">food state</string>
+    <string name="food_weight">2kg</string>
+    <string name="food_box_name">Food Box Name</string>
 </resources>

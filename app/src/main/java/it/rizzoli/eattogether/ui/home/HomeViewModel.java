@@ -1,4 +1,4 @@
-package it.rizzoli.eattogether.ui.home;// EventViewModel.java
+package it.rizzoli.eattogether.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,25 +23,6 @@ public class HomeViewModel extends ViewModel {
         List<Event> events = databaseHelper.getEvents();
         eventsList.setValue(events);
     }
-
-//    public void addEvent(Event event) {
-//        databaseHelper.addEvent(event);
-//        loadEventNames();
-//    }
-//
-//    public void deleteEvent(Event event) {
-//        databaseHelper.deleteEvent(event);
-//        loadEventNames();
-//    }
-//
-//    public void updateEvent(Event event) {
-//        databaseHelper.updateEvent(event);
-//        loadEventNames();
-//    }
-//
-//    public Event getEventById(long eventId) {
-//        return databaseHelper.getEventById(eventId);
-//    }
 
     public LiveData<List<Event>> getEvents() {
         return eventsList;

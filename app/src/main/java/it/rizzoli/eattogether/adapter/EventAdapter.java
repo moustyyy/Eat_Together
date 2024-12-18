@@ -13,12 +13,12 @@ import java.util.List;
 import it.rizzoli.eattogether.R;
 import it.rizzoli.eattogether.database.entity.Event;
 
-public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private List<Event> eventsList;
     private OnItemClickListener onItemClickListener;
 
-    public EventsAdapter(List<Event> events, OnItemClickListener onItemClickListener) {
+    public EventAdapter(List<Event> events, OnItemClickListener onItemClickListener) {
         this.eventsList = events;
         this.onItemClickListener = onItemClickListener;
     }
@@ -27,7 +27,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_event_box, parent, false);
+                .inflate(R.layout.item_event, parent, false);
         return new EventViewHolder(view);
     }
 

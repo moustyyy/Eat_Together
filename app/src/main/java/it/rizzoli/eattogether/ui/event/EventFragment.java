@@ -1,6 +1,8 @@
 package it.rizzoli.eattogether.ui.event;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +13,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.List;
+
 import it.rizzoli.eattogether.R;
+import it.rizzoli.eattogether.adapter.FoodBoxAdapter;
 import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.database.entity.Event;
-import it.rizzoli.eattogether.ui.home.HomeViewModel;
 
-public class EventFragment extends Fragment {
+import android.widget.ListView;
+
+import it.rizzoli.eattogether.ui.food_boox.FragmentFoodBox;
+
+
+public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTransactionListener {
     private ImageView eventImage;
     private TextView eventName, eventDate, eventUserCreator;
     private DatabaseHelper databaseHelper;
+    private ListView foodBoxListView;
 
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,20 +43,47 @@ public class EventFragment extends Fragment {
         eventUserCreator = root.findViewById(R.id.eventUserCreator);
 
         databaseHelper = new DatabaseHelper(getContext());
+        foodBoxListView = root.findViewById(R.id.foodBoxList);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
             int eventId = bundle.getInt("selectedEvent", 1);
 
-            if (eventId != -1) {
-                Event event = databaseHelper.getEventById(eventId);
-                if (event != null) {
-                    eventName.setText(event.getNome());
-                    eventDate.setText(event.getData());
-                    eventUserCreator.setText(String.valueOf(event.getIdUserCreator()));
-                }
+            List<String> existingFoodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
+            if (existingFoodBoxes == null || existingFoodBoxes.isEmpty()) {
+                databaseHelper.insertSampleFoodItemsForEvent(eventId);
+            }
+
+            List<String> foodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
+
+            if (foodBoxes != null && !foodBoxes.isEmpty()) {
+                FoodBoxAdapter foodBoxAdapter = new FoodBoxAdapter(getContext(), foodBoxes, this);
+                foodBoxListView.setAdapter(foodBoxAdapter);
+            } else {
+                Log.d("EventFragment", "No food boxes available");
+            }
+
+            Event event = databaseHelper.getEventById(eventId);
+            if (event != null) {
+                eventName.setText(event.getNome());
+                eventDate.setText(event.getData());
+                eventUserCreator.setText(String.valueOf(event.getIdUserCreator()));
             }
         }
+
         return root;
     }
+
+    @Override
+    public void onFoodBoxClick(FragmentFoodBox fragmentFoodBox) {
+        if (getActivity() != null) {
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.nav_host_fragment_activity_main, fragmentFoodBox)
+                    .addToBackStack(null)
+                    .commit();
+        }
+    }
 }
+
+
+
