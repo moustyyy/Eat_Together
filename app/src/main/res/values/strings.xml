@@ -9,8 +9,11 @@
     <string name="log_in">log in</string>
     <string name="don_t_have_an_account">don\'t have an account</string>
     <string name="sign_up">sign up\n</string>
-    <string name="user_gia_presente">User già presente</string>
-    <string name="le_password_non_coincidono">Le password non coincidono</string>
+    <string name="user_already_exists">User already exits</string>
+    <string name="password_not_equals">Le password non coincidono</string>
     <string name="confirm_password">confirm_password</string>
     <string name="already_have_any_account">already_have_any_account</string>
+    <string name="logo">logo</string>
+    <string name="log_out">Log Out</string>
+    <string name="settings">settings</string>
 </resources>

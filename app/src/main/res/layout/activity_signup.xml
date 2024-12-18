@@ -22,11 +22,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/ic_settings"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"/>
+                android:src="@mipmap/ic_launcher" />
         </LinearLayout>
 
         <TextView
@@ -42,7 +41,7 @@
             android:id="@+id/errorUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/user_gia_presente"
+            android:text="@string/user_already_exists"
             android:textSize="20sp"
             android:layout_marginTop="25dp"
             android:textColor="@color/red"
@@ -52,7 +51,7 @@
             android:id="@+id/errorPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/le_password_non_coincidono"
+            android:text="@string/password_not_equals"
             android:textSize="20sp"
             android:layout_marginTop="25dp"
             android:textColor="@color/red"
