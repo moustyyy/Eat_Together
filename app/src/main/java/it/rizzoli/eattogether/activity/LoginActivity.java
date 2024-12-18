@@ -2,6 +2,7 @@ package it.rizzoli.eattogether.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
@@ -45,11 +46,18 @@ public class LoginActivity extends AppCompatActivity {
 
         login.setOnClickListener(view -> {
             if (isFill()) {
-                Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
-                startActivity(intent);
-            }
-            else {
-                Toast toast = Toast.makeText(this, "Tutti i campi devono essere compilati", Toast.LENGTH_LONG);
+                String sql = "SELECT * FROM USERS WHERE username = ? AND password = ?";
+                String[] selectionArgs = new String[] { username.getText().toString(), password.getText().toString() };
+                Cursor cursor = db.rawQuery(sql, selectionArgs);
+
+                if (cursor.moveToFirst()) {
+
+                }
+                cursor.close();
+                //Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
+                //startActivity(intent);
+            } else {
+                Toast toast = Toast.makeText(this, "All fields must be filled in", Toast.LENGTH_LONG);
                 toast.show();
             }
         });

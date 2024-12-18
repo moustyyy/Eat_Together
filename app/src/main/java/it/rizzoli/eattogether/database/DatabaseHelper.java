@@ -130,6 +130,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_COMPLEX_FOOD_TABLE);
         db.execSQL(CREATE_COMPLEXFOOD_FOODBOX_TABLE);
         db.execSQL(CREATE_COMPLEXFOOD_FOOD_TABLE);
+
+        String INSERT_USER = "INSERT INTO Users (username, password) VALUES (?, ?);";
+        db.execSQL(INSERT_USER,  new Object[]{"admin", "admin"});
     }
 
     @Override
