@@ -35,7 +35,7 @@
             android:paddingBottom="13dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/password"
@@ -52,7 +52,7 @@
             android:paddingBottom="13dp"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/login"

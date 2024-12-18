@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/create"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:background="@color/bg_dark"
     android:orientation="vertical"
-    tools:context=".activity.MainActivity"
-    tools:ignore="ExtraText">
+    tools:context=".activity.LoginActivity">
 
     <!-- Sezione caricamento foto -->
     <LinearLayout
@@ -18,152 +16,118 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/uploadPhotoLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Creazione evento"
             android:textColor="@color/txt_darkmode"
-            android:textSize="32sp"
+            android:textSize="30sp"
             android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            tools:ignore="HardcodedText" />
+            android:fontFamily="@font/poppins_regular"/>
 
-        <!-- Button per selezionare la foto -->
-        <EditText
+        <FrameLayout
             android:id="@+id/uploadPhotoInput"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="150dp"
             android:background="@color/bg_dark_2"
-            android:drawableStart="@drawable/ic_upload_here"
-            android:drawablePadding="10dp"
-            android:padding="15dp"
-            android:text="Carica foto"
-            android:textColor="@color/txt_placeholder"
-            tools:ignore="HardcodedText" />
-
-        <!-- Titolo -->
-        <TextView
-            android:id="@+id/titleLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Titolo"
-            android:textColor="@color/txt_darkmode"
-            android:textSize="18sp"
-            tools:ignore="HardcodedText" />
+            android:layout_marginTop="25dp">
+            <Button
+                android:id="@+id/uploadImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Upload IMAGE"
+                android:drawablePadding="10dp"
+                android:background="@android:color/transparent"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/txt_placeholder"
+                android:drawableRight="@drawable/ic_upload"/>
+            <ImageView
+                android:id="@+id/imageView"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+        </FrameLayout>
 
         <EditText
-            android:id="@+id/titleInput"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="titolo"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:textColorHint="@color/txt_placeholder"
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:background="@color/bg_dark_2"
-            android:padding="10dp"
-            tools:ignore="HardcodedText" />
-
-        <!-- Data -->
-        <TextView
-            android:id="@+id/dateLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Data"
-            android:textColor="@color/txt_darkmode"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            tools:ignore="HardcodedText" />
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:inputType="text"
+            android:hint="Titolo"/>
 
         <EditText
-            android:id="@+id/dateInput"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="seleziona data"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:textColorHint="@color/txt_placeholder"
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:background="@color/bg_dark_2"
-            android:padding="10dp"
-            android:focusable="false"
-            android:clickable="true"
-            android:inputType="none"
-            tools:ignore="HardcodedText,TextFields" />
-
-        <!-- Indirizzo -->
-        <TextView
-            android:id="@+id/addressLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Indirizzo"
-            android:textColor="@color/txt_darkmode"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            tools:ignore="DuplicateIds,HardcodedText" />
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:inputType="text"
+            android:hint="Data"/>
 
         <EditText
-            android:id="@+id/addressInput"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="indirizzo"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:textColorHint="@color/txt_placeholder"
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:background="@color/bg_dark_2"
-            android:padding="10dp"
-            tools:ignore="DuplicateIds,HardcodedText" />
-
-        <!-- Descrizione -->
-        <TextView
-            android:id="@+id/descriptionLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descrizione"
-            android:textColor="@color/txt_darkmode"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            tools:ignore="DuplicateIds,HardcodedText" />
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:inputType="text"
+            android:hint="Indirizzo"/>
 
         <EditText
-            android:id="@+id/descriptionInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Scrivi qui..."
+            android:layout_marginTop="25dp"
             android:textColorHint="@color/txt_placeholder"
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:background="@color/bg_dark_2"
-            android:padding="10dp"
-            android:lines="4"
-            android:gravity="top|start"
-            tools:ignore="DuplicateIds,HardcodedText" />
-
-    </LinearLayout>
-
-    <!-- Bottone "Crea" in basso a destra -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="30dp"
-        android:paddingEnd="20dp"
-        tools:ignore="RtlSymmetry">
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:inputType="textMultiLine"
+            android:hint="Descrizione"
+            android:gravity="top"
+            android:lines="3"
+            />
 
         <Button
-            android:id="@+id/createButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:backgroundTint="@color/primary"
-            android:text="Crea"
-            android:textColor="@color/txt_darkmode"
-            android:drawableEnd="@drawable/ic_upload"
-            android:drawablePadding="10dp"
-            android:padding="15dp"
-            tools:ignore="HardcodedText" />
-
+            android:fontFamily="@font/poppins_regular"
+            android:text="CREA"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:textStyle="bold" />
     </LinearLayout>
+
 
 </FrameLayout>
