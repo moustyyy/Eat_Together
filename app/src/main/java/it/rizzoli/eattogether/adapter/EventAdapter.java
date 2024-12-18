@@ -35,6 +35,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = eventsList.get(position);
         holder.eventNameTextView.setText(event.getNome());
+        holder.eventDateTextView.setText(event.getData());
 
         holder.itemView.setOnClickListener(v -> {
             if (onItemClickListener != null) {
@@ -50,10 +51,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     public static class EventViewHolder extends RecyclerView.ViewHolder {
         TextView eventNameTextView;
+        TextView eventDateTextView;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
             eventNameTextView = itemView.findViewById(R.id.event_name);
+            eventDateTextView = itemView.findViewById(R.id.event_date);
         }
     }
 
