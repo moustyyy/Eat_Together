@@ -260,6 +260,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String insertFoodBox = "INSERT INTO Food_Boxes (idEvent, idUserAdder, nome, descrizione) VALUES (?, ?, ?, ?);";
         db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
+        db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
+        db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
 
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
         int foodBoxId = -1;
