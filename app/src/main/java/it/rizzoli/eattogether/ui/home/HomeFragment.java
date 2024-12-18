@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import it.rizzoli.eattogether.R;
 import it.rizzoli.eattogether.adapter.EventAdapter;
 import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.databinding.FragmentHomeBinding;
@@ -26,9 +27,10 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        FragmentHomeBinding binding = FragmentHomeBinding.inflate(inflater, container, false);
 
-        recyclerView = binding.recyclerView;
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerView = root.findViewById(R.id.recycler_view);
         databaseHelper = new DatabaseHelper(getContext());
 
         eventViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory() {
@@ -45,7 +47,7 @@ public class HomeFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         });
 
-        return binding.getRoot();
+        return root;
     }
 
     @Override
