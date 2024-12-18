@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import it.rizzoli.eattogether.database.entity.Event;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "mydatabase.db";
@@ -121,23 +123,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public List<String> getEventNames() {
+    public List<Event> getEvents() {
         SQLiteDatabase db = this.getReadableDatabase();
         List<String> eventNames = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
 
-        String query = "SELECT nome FROM Events";
-        try (Cursor cursor = db.rawQuery(query, null)) {
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    @SuppressLint("Range")
-                    String eventName = cursor.getString(cursor.getColumnIndex("nome"));
-                    eventNames.add(eventName);
-                } while (cursor.moveToNext());
-            }
-        } catch (SQLException e) {
-            Log.d("SQL Error getEventNames: ", Objects.requireNonNull(e.getMessage()));
+        String sql = "SELECT * FROM Events WHERE idUserCreator = ?";
+        String[] selectionArgs = new String[] { "1" };
+        Cursor c = db.rawQuery(sql, selectionArgs);
+
+        if (c != null && c.moveToFirst()) {
+            do {
+                events.add(Event.fromCursor(c));
+            } while (c.moveToNext());
+            c.close();
         }
-        return eventNames;
+
+        return events;
     }
 
     @Override

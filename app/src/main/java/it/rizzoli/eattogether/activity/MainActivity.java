@@ -10,16 +10,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 import it.rizzoli.eattogether.R;
-import it.rizzoli.eattogether.adapter.EventAdapter;
 import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.databinding.ActivityMainBinding;
 

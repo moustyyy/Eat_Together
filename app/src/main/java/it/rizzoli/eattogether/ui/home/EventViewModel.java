@@ -4,12 +4,14 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import it.rizzoli.eattogether.database.DatabaseHelper;
+import it.rizzoli.eattogether.database.entity.Event;
 
 public class EventViewModel extends ViewModel {
-    private final MutableLiveData<List<String>> eventNames = new MutableLiveData<>();
+    private final MutableLiveData<List<Event>> eventsList = new MutableLiveData<>();
 
     private final DatabaseHelper databaseHelper;
 
@@ -19,11 +21,11 @@ public class EventViewModel extends ViewModel {
     }
 
     private void loadEventNames() {
-        List<String> events = databaseHelper.getEventNames();
-        eventNames.setValue(events);
+        List<Event> events = databaseHelper.getEvents();
+        eventsList.setValue(events);
     }
 
-    public LiveData<List<String>> getEventNames() {
-        return eventNames;
+    public LiveData<List<Event>> getEvents() {
+        return eventsList;
     }
 }
