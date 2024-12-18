@@ -48,6 +48,7 @@ public class FoodBoxAdapter extends BaseAdapter {
         }
 
         TextView foodBoxName = convertView.findViewById(R.id.foodBoxName);
+        TextView foodBoxCreator = convertView.findViewById(R.id.foodBoxCreator);
         foodBoxName.setText(foodBoxes.get(position));
 
         convertView.setOnClickListener(v -> {

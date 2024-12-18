@@ -181,7 +181,7 @@
                 android:id="@+id/eventDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ritrovo per il compleanno dei 20 anni di Marta."
+                android:text="Descrizione"
                 android:textColor="@color/txt_darkmode"
                 android:textStyle="bold"
                 android:textSize="16sp"
@@ -210,7 +210,8 @@
                 android:textColor="@color/txt_darkmode"
                 android:textSize="20sp"
                 android:fontFamily="@font/poppins_regular"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
 
             <ListView
                 android:id="@+id/foodBoxList"

@@ -3,14 +3,12 @@ package it.rizzoli.eattogether.database;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import it.rizzoli.eattogether.database.entity.Event;
 
@@ -24,14 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "username TEXT NOT NULL, " +
                     "password TEXT NOT NULL);";
-
-    private static final String CREATE_USER_USER_TABLE =
-            "CREATE TABLE User_User (" +
-                    "idUser1 INTEGER NOT NULL, " +
-                    "idUser2 INTEGER NOT NULL, " +
-                    "PRIMARY KEY (idUser1, idUser2), " +
-                    "FOREIGN KEY (idUser1) REFERENCES Users(id), " +
-                    "FOREIGN KEY (idUser2) REFERENCES Users(id));";
 
     private static final String CREATE_EVENT_TABLE =
             "CREATE TABLE Events (" +
@@ -59,65 +49,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "nome TEXT NOT NULL);";
 
-    private static final String CREATE_FOOD_BOX_TABLE =
+    private static final String CREATE_FOODBOX_TABLE =
             "CREATE TABLE Food_Boxes (" +
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "idUserAdder INTEGER NOT NULL, " +
                     "idEvent INTEGER NOT NULL, " +
                     "nome TEXT NOT NULL, " +
                     "descrizione TEXT NOT NULL," +
-                    "FOREIGN KEY (idEvent) REFERENCES Events(id));";
+                    "FOREIGN KEY (idEvent) REFERENCES Events(id)," +
+                    "FOREIGN KEY (idUserAdder) REFERENCES Users(id));";
 
     private static final String CREATE_FOOD_FOODBOX_TABLE =
             "CREATE TABLE Food_FoodBox (" +
                     "idFoodBox INTEGER NOT NULL, " +
                     "idFood INTEGER NOT NULL, " +
-                    "idUserAdder INTEGER NOT NULL, " +
-                    "PRIMARY KEY (idFoodBox, idFood,idUserAdder), " +
+                    "PRIMARY KEY (idFoodBox, idFood), " +
                     "FOREIGN KEY (idFoodBox) REFERENCES Food_Boxes(id), " +
-                    "FOREIGN KEY (idFood) REFERENCES Foods(id), " +
-                    "FOREIGN KEY (idUserAdder) REFERENCES Users(id));";
-
-    private static final String CREATE_CUSTOM_FOOD_TABLE =
-            "CREATE TABLE Custom_Foods (" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "idFoodBox INTEGER NOT NULL, " +
-                    "idUserAdder INTEGER NOT NULL, " +
-                    "nome TEXT NOT NULL, " +
-                    "descrizione TEXT, " +
-                    "FOREIGN KEY (idFoodBox) REFERENCES Food_Boxes(id), " +
-                    "FOREIGN KEY (idUserAdder) REFERENCES Users(id));";
-
-    private static final String CREATE_FOOD_DETAIL_TABLE =
-            "CREATE TABLE Food_Details (" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "idFood INTEGER NOT NULL, " +
-                    "carboidrati REAL, " +
-                    "proteine REAL, " +
-                    "grassi REAL, " +
                     "FOREIGN KEY (idFood) REFERENCES Foods(id));";
-
-    private static final String CREATE_COMPLEX_FOOD_TABLE =
-            "CREATE TABLE Complex_Foods (" +
-                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "nome TEXT NOT NULL);";
-
-    private static final String CREATE_COMPLEXFOOD_FOODBOX_TABLE =
-            "CREATE TABLE ComplexFood_FoodBox (" +
-                    "idFoodBox INTEGER NOT NULL, " +
-                    "idComplexFood INTEGER NOT NULL, " +
-                    "idUserAdder INTEGER NOT NULL, " +
-                    "PRIMARY KEY (idFoodBox, idComplexFood, idUserAdder), " +
-                    "FOREIGN KEY (idFoodBox) REFERENCES Food_Boxex(id), " +
-                    "FOREIGN KEY (idComplexFood) REFERENCES Complex_Foods(id), " +
-                    "FOREIGN KEY (idUserAdder) REFERENCES Users(id));";
-
-    private static final String CREATE_COMPLEXFOOD_FOOD_TABLE =
-            "CREATE TABLE ComplexFood_Food (" +
-                    "idFood INTEGER NOT NULL, " +
-                    "idComplexFood INTEGER NOT NULL, " +
-                    "PRIMARY KEY (idFood, idComplexFood), " +
-                    "FOREIGN KEY (idFood) REFERENCES Foods(id), " +
-                    "FOREIGN KEY (idComplexFood) REFERENCES Complex_Foods(id));";
 
 
     public DatabaseHelper(Context context) {
@@ -159,17 +107,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.d("DATABASE", "onCreate chiamato");
 
         db.execSQL(CREATE_USER_TABLE);
-        db.execSQL(CREATE_USER_USER_TABLE);
         db.execSQL(CREATE_EVENT_TABLE);
         db.execSQL(CREATE_EVENT_USER_TABLE);
         db.execSQL(CREATE_FOOD_TABLE);
-        db.execSQL(CREATE_FOOD_BOX_TABLE);
+        db.execSQL(CREATE_FOODBOX_TABLE);
         db.execSQL(CREATE_FOOD_FOODBOX_TABLE);
-        db.execSQL(CREATE_CUSTOM_FOOD_TABLE);
-        db.execSQL(CREATE_FOOD_DETAIL_TABLE);
-        db.execSQL(CREATE_COMPLEX_FOOD_TABLE);
-        db.execSQL(CREATE_COMPLEXFOOD_FOODBOX_TABLE);
-        db.execSQL(CREATE_COMPLEXFOOD_FOOD_TABLE);
 
         String INSERT_USER = "INSERT INTO Users (username, password) VALUES (?, ?);";
         db.execSQL(INSERT_USER, new Object[]{"admin", "admin"});
@@ -268,8 +210,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(insertFood2);
         db.execSQL(insertFood3);
 
-        String insertFoodBox = "INSERT INTO Food_Boxes (idEvent, nome, descrizione) VALUES (?, ?, ?);";
-        db.execSQL(insertFoodBox, new Object[]{eventId, "Box 1", "Food box for event " + eventId});
+        String insertFoodBox = "INSERT INTO Food_Boxes (idEvent, idUserAdder, nome, descrizione) VALUES (?, ?, ?, ?);";
+        db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
 
         Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
         int foodBoxId = -1;
@@ -278,13 +220,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.close();
         }
 
-        String insertFoodFoodBox1 = "INSERT INTO Food_FoodBox (idFoodBox, idFood, idUserAdder) VALUES (?, ?, ?);";
-        String insertFoodFoodBox2 = "INSERT INTO Food_FoodBox (idFoodBox, idFood, idUserAdder) VALUES (?, ?, ?);";
-        String insertFoodFoodBox3 = "INSERT INTO Food_FoodBox (idFoodBox, idFood, idUserAdder) VALUES (?, ?, ?);";
+        String insertFoodFoodBox1 = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
+        String insertFoodFoodBox2 = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
+        String insertFoodFoodBox3 = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
 
-        db.execSQL(insertFoodFoodBox1, new Object[]{foodBoxId, 1, 1});  // Pizza (foodId = 1)
-        db.execSQL(insertFoodFoodBox2, new Object[]{foodBoxId, 2, 1});  // Pasta (foodId = 2)
-        db.execSQL(insertFoodFoodBox3, new Object[]{foodBoxId, 3, 1});  // Salad (foodId = 3)
+        db.execSQL(insertFoodFoodBox1, new Object[]{foodBoxId, 1});  // Pizza (foodId = 1)
+        db.execSQL(insertFoodFoodBox2, new Object[]{foodBoxId, 2});  // Pasta (foodId = 2)
+        db.execSQL(insertFoodFoodBox3, new Object[]{foodBoxId, 3});  // Salad (foodId = 3)
     }
 
 }
