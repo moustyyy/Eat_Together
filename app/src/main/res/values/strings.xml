@@ -18,7 +18,7 @@
     <string name="settings">settings</string>
     <string name="empty_fields">empty fields</string>
     <string name="profile_image">profile image</string>
-    <string name="fullname">name surname</string>
+    <string name="fullname">username</string>
     <string name="edit_profile">Edit profile</string>
     <string name="event_name">Event Name</string>
 </resources>

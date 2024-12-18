@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,9 +30,9 @@ public class ProfileFragment extends Fragment {
         String session = sharedPreferences.getString("session", "notFound");
 
         TextView username = root.findViewById(R.id.profileUserName);
-        username.setText("Benvenuto, " + session + "!");
+        username.setText(session);
 
-        TextView logout = root.findViewById(R.id.logout);
+        LinearLayout logout = root.findViewById(R.id.logout);
 
         logout.setOnClickListener(view -> {
             SharedPreferences.Editor editor = sharedPreferences.edit();
