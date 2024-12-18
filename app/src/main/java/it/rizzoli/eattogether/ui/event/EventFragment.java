@@ -24,7 +24,7 @@ import it.rizzoli.eattogether.database.entity.Event;
 
 import android.widget.ListView;
 
-import it.rizzoli.eattogether.ui.food_box.FoodBoxFragment;
+import it.rizzoli.eattogether.ui.food_boox.FragmentFoodBox;
 
 
 public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTransactionListener {
@@ -94,10 +94,10 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
     }
 
     @Override
-    public void onFoodBoxClick(FoodBoxFragment foodBoxFragment) {
+    public void onFoodBoxClick(FragmentFoodBox fragmentFoodBox) {
         if (getActivity() != null) {
             getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, foodBoxFragment)
+                    .replace(R.id.nav_host_fragment_activity_main, fragmentFoodBox)
                     .addToBackStack(null)
                     .commit();
         }

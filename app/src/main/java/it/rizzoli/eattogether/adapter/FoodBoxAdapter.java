@@ -11,8 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import it.rizzoli.eattogether.R;
-import it.rizzoli.eattogether.database.DatabaseHelper;
-import it.rizzoli.eattogether.ui.food_box.FoodBoxFragment;
+import it.rizzoli.eattogether.ui.food_boox.FragmentFoodBox;
 
 public class FoodBoxAdapter extends BaseAdapter {
     private Context context;
@@ -20,14 +19,11 @@ public class FoodBoxAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private FragmentTransactionListener fragmentTransactionListener;
 
-    private DatabaseHelper databaseHelper;
-
     public FoodBoxAdapter(Context context, List<String> foodBoxes, FragmentTransactionListener listener) {
         this.context = context;
         this.foodBoxes = foodBoxes;
         this.inflater = LayoutInflater.from(context);
         this.fragmentTransactionListener = listener;
-        this.databaseHelper = new DatabaseHelper(context);
     }
 
     @Override
@@ -57,18 +53,13 @@ public class FoodBoxAdapter extends BaseAdapter {
 
         convertView.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
+            bundle.putInt("foodBoxId", position);
 
-            int foodBoxId = databaseHelper.getFoodBoxIdFromName(foodBoxes.get(position));
+            FragmentFoodBox fragmentFoodBox = new FragmentFoodBox();
+            fragmentFoodBox.setArguments(bundle);
 
-            if (foodBoxId != -1) {
-                bundle.putInt("foodBoxId", foodBoxId);
-
-                FoodBoxFragment foodBoxFragment = new FoodBoxFragment();
-                foodBoxFragment.setArguments(bundle);
-
-                if (fragmentTransactionListener != null) {
-                    fragmentTransactionListener.onFoodBoxClick(foodBoxFragment);
-                }
+            if (fragmentTransactionListener != null) {
+                fragmentTransactionListener.onFoodBoxClick(fragmentFoodBox);
             }
         });
 
@@ -76,6 +67,8 @@ public class FoodBoxAdapter extends BaseAdapter {
     }
 
     public interface FragmentTransactionListener {
-        void onFoodBoxClick(FoodBoxFragment foodBoxFragment);
+        void onFoodBoxClick(FragmentFoodBox fragmentFoodBox);
     }
 }
+
+
