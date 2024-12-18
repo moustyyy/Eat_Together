@@ -132,27 +132,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_COMPLEXFOOD_FOOD_TABLE);
     }
 
-    public void deleteAllData(SQLiteDatabase db) {
-        db.delete("User", null, null);
-        db.delete("User_User", null, null);
-        db.delete("Event", null, null);
-        db.delete("Event_User", null, null);
-        db.delete("Food", null, null);
-        db.delete("Food_Box", null, null);
-        db.delete("Food_FoodBox", null, null);
-        db.delete("Custom_Food", null, null);
-        db.delete("Food_Detail", null, null);
-        db.delete("Complex_Food", null, null);
-        db.delete("ComplexFood_FoodBox", null, null);
-        db.delete("ComplexFood_Food", null, null);
-
-        Log.d("DATABASE", "Tutti i dati sono stati eliminati");
-    }
-
-
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS contact");
-        onCreate(db);
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 }

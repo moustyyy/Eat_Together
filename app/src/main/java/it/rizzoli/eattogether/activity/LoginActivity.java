@@ -18,10 +18,10 @@ import it.rizzoli.eattogether.ui.home.HomeFragment;
 public class LoginActivity extends AppCompatActivity {
 
     private UserDbAdapter dbUser;
-    Button login;
-    Button signup;
     EditText password;
     EditText username;
+    Button login;
+    Button signup;
 
 
     @Override
@@ -32,21 +32,17 @@ public class LoginActivity extends AppCompatActivity {
         File databaseFile = getDatabasePath("mydatabase.db");
         SQLiteDatabase.deleteDatabase(databaseFile);
 
-        signup = findViewById(R.id.signup);
-        login = findViewById(R.id.login);
         password = findViewById(R.id.password);
         username = findViewById(R.id.username);
-
+        signup = findViewById(R.id.signup);
+        login = findViewById(R.id.login);
 
         DatabaseHelper dbHelper =  new DatabaseHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         dbUser = new UserDbAdapter(this);
 
-        //per pulire il db in fase di sviluppo
-        //dbHelper.deleteAllData(db);
 
         login.setOnClickListener(view -> {
-            //if (isFill() && login()) toHome();
             if (isFill()) {
                 Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
                 startActivity(intent);
@@ -57,32 +53,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        //existUser();
-//        signup.setOnClickListener(view -> {
-//            Intent intent = new Intent(LoginActivity.this, Register.class);
-//            startActivity(intent);
-//        });
+        signup.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private Boolean isFill() {
         return !(username.getText().toString().equals("")
                 || password.getText().toString().equals(""));
     }
-
-    /*
-    private Boolean login(){
-        Boolean response = false;
-        try {
-            dbUser.open();
-            response = dbUser.existUser(username.getText().toString(), password.getText().toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            dbUser.close();
-        }
-        return response;
-    }
-
-     */
 }
 
