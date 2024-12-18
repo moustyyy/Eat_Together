@@ -51,11 +51,14 @@ public class LoginActivity extends AppCompatActivity {
                 Cursor cursor = db.rawQuery(sql, selectionArgs);
 
                 if (cursor.moveToFirst()) {
-
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast toast = Toast.makeText(this, "User with username = [" + username.getText().toString() +
+                            "] and password = [" + password.getText().toString() + "] does not exists", Toast.LENGTH_LONG);
+                    toast.show();
                 }
                 cursor.close();
-                //Intent intent = new Intent(LoginActivity.this, HomeFragment.class);
-                //startActivity(intent);
             } else {
                 Toast toast = Toast.makeText(this, "All fields must be filled in", Toast.LENGTH_LONG);
                 toast.show();
