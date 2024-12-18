@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Objects;
+
 import it.rizzoli.eattogether.R;
 import it.rizzoli.eattogether.database.UserDbAdapter;
 
@@ -28,6 +30,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_signup);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         db = new UserDbAdapter(this);
 

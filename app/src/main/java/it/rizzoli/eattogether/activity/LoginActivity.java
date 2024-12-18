@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.Objects;
 
 import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.database.UserDbAdapter;
@@ -30,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         File databaseFile = getDatabasePath("mydatabase.db");
         SQLiteDatabase.deleteDatabase(databaseFile);
