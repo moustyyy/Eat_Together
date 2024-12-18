@@ -11,4 +11,6 @@
         <!-- Customize your theme here. -->
         <item name="backgroundColor">@color/bg_dark</item>
     </style>
+
+
 </resources>
