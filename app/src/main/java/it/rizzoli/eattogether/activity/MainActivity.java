@@ -24,9 +24,6 @@ import it.rizzoli.eattogether.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private RecyclerView recyclerView;
-    private EventAdapter eventAdapter;
-    private List<String> eventNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +42,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        recyclerView = findViewById(R.id.recycler_view);
-
-        eventNames = new ArrayList<>(Arrays.asList(
-                "Festa di Natale",
-                "Capodanno",
-                "Evento Benefico"
-        ));
-
-        eventAdapter = new EventAdapter(eventNames);
-        recyclerView.setAdapter(eventAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
 

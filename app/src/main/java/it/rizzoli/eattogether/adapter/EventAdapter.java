@@ -14,7 +14,7 @@ import it.rizzoli.eattogether.R;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
-    private List<String> eventNames;  // Lista dei nomi degli eventi
+    private List<String> eventNames;
 
     public EventAdapter(List<String> eventNames) {
         this.eventNames = eventNames;
