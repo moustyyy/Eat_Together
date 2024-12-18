@@ -133,6 +133,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String INSERT_USER = "INSERT INTO Users (username, password) VALUES (?, ?);";
         db.execSQL(INSERT_USER,  new Object[]{"admin", "admin"});
+        String INSERT_EVENT_1 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        db.execSQL(INSERT_EVENT_1,  new Object[]{"1", "nome_evento_1", "2024-12-20", "18:00:00", "Via Roma 123",
+                "Milano", "Descrizione dell'evento_1"});
+        String INSERT_EVENT_2 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        db.execSQL(INSERT_EVENT_2,  new Object[]{"1", "nome_evento_2", "2024-12-22", "20:00:00", "Via Roma 123",
+                "Milano", "Descrizione dell'evento_2"});
+        String INSERT_EVENT_3 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        db.execSQL(INSERT_EVENT_3,  new Object[]{"1", "nome_evento_3", "2024-12-25", "21:00:00", "Via Roma 123",
+                "Milano", "Descrizione dell'evento_3"});
     }
 
     @Override

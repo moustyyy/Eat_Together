@@ -1,5 +1,6 @@
 package it.rizzoli.eattogether.activity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -19,6 +20,7 @@ import java.util.Objects;
 
 import it.rizzoli.eattogether.R;
 import it.rizzoli.eattogether.adapter.EventAdapter;
+import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        DatabaseHelper dbHelper =  new DatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
