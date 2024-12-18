@@ -134,10 +134,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String insertFood1 = "INSERT INTO Foods (nome) VALUES ('Pizza');";
         String insertFood2 = "INSERT INTO Foods (nome) VALUES ('Pasta');";
         String insertFood3 = "INSERT INTO Foods (nome) VALUES ('Salad');";
+        String insertFood4 = "INSERT INTO Foods (nome) VALUES ('Burger');";
+        String insertFood5 = "INSERT INTO Foods (nome) VALUES ('Sushi');";
+        String insertFood6 = "INSERT INTO Foods (nome) VALUES ('Tacos');";
+        String insertFood7 = "INSERT INTO Foods (nome) VALUES ('Spaghetti');";
+        String insertFood8 = "INSERT INTO Foods (nome) VALUES ('Ice Cream');";
+        String insertFood9 = "INSERT INTO Foods (nome) VALUES ('Steak');";
+        String insertFood10 = "INSERT INTO Foods (nome) VALUES ('Fries');";
+        String insertFood11 = "INSERT INTO Foods (nome) VALUES ('Sandwich');";
+        String insertFood12 = "INSERT INTO Foods (nome) VALUES ('Soup');";
+        String insertFood13 = "INSERT INTO Foods (nome) VALUES ('Risotto');";
+        String insertFood14 = "INSERT INTO Foods (nome) VALUES ('Lasagna');";
+        String insertFood15 = "INSERT INTO Foods (nome) VALUES ('Paella');";
 
         db.execSQL(insertFood1);
         db.execSQL(insertFood2);
         db.execSQL(insertFood3);
+        db.execSQL(insertFood4);
+        db.execSQL(insertFood5);
+        db.execSQL(insertFood6);
+        db.execSQL(insertFood7);
+        db.execSQL(insertFood8);
+        db.execSQL(insertFood9);
+        db.execSQL(insertFood10);
+        db.execSQL(insertFood11);
+        db.execSQL(insertFood12);
+        db.execSQL(insertFood13);
+        db.execSQL(insertFood14);
+        db.execSQL(insertFood15);
 
     }
 
