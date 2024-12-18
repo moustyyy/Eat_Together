@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment {
 
         eventViewModel = new ViewModelProvider(this).get(EventViewModel.class);
 
-        // Osserva la lista degli eventi dal ViewModel
         eventViewModel.getEventNames().observe(getViewLifecycleOwner(), eventNames -> {
             eventAdapter = new EventAdapter(eventNames);
             recyclerView.setAdapter(eventAdapter);

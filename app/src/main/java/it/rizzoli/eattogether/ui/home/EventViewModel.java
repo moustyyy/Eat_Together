@@ -13,7 +13,7 @@ public class EventViewModel extends ViewModel {
 
     public EventViewModel() {
         eventNames.setValue(new ArrayList<>(Arrays.asList(
-                "Festa di Natale", "Capodanno", "Evento Benefico"
+                "Festa di Natale", "Capodanno", "Compleanno di Marco"
         )));
     }
 

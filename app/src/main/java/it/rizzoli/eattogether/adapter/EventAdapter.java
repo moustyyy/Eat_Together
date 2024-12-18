@@ -31,7 +31,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        // Imposta il nome dell'evento nella TextView
         String eventName = eventNames.get(position);
         holder.eventNameTextView.setText(eventName);
     }
