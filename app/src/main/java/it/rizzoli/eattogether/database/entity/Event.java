@@ -3,8 +3,10 @@ package it.rizzoli.eattogether.database.entity;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Event {
+public class Event implements Parcelable {
 
     private int id;
     private int idUserCreator;
@@ -117,6 +119,46 @@ public class Event {
         event.setCitta(cursor.getString(cursor.getColumnIndex("citta")));
         event.setDescrizione(cursor.getString(cursor.getColumnIndex("descrizione")));
         return event;
+    }
+
+    protected Event(Parcel in) {
+        id = in.readInt();
+        idUserCreator = in.readInt();
+        nome = in.readString();
+        data = in.readString();
+        ora = in.readString();
+        indirizzo = in.readString();
+        citta = in.readString();
+        descrizione = in.readString();
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(idUserCreator);
+        dest.writeString(nome);
+        dest.writeString(data);
+        dest.writeString(ora);
+        dest.writeString(indirizzo);
+        dest.writeString(citta);
+        dest.writeString(descrizione);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 }
 

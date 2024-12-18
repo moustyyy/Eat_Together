@@ -1,20 +1,23 @@
 package it.rizzoli.eattogether.ui.home;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.Serializable;
 
 import it.rizzoli.eattogether.R;
 import it.rizzoli.eattogether.adapter.EventsAdapter;
 import it.rizzoli.eattogether.database.DatabaseHelper;
+import it.rizzoli.eattogether.database.entity.Event;
+import it.rizzoli.eattogether.ui.event.EventFragment;
 
 public class HomeFragment extends Fragment {
 
@@ -30,15 +33,30 @@ public class HomeFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycler_view);
         databaseHelper = new DatabaseHelper(getContext());
 
-        EventViewModel eventViewModel = new EventViewModel(databaseHelper);
+        HomeViewModel homeViewModel = new HomeViewModel(databaseHelper);
 
-        eventViewModel.getEvents().observe(getViewLifecycleOwner(), eventNames -> {
-            eventAdapter = new EventsAdapter(eventNames);
+        homeViewModel.getEvents().observe(getViewLifecycleOwner(), eventNames -> {
+            eventAdapter = new EventsAdapter(eventNames, this::navigateToEventDetails);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(eventAdapter);
         });
 
         return root;
+    }
+
+    private void navigateToEventDetails(Event event) {
+        EventFragment eventDetailsFragment = new EventFragment();
+
+        Bundle bundle = new Bundle();
+
+        bundle.putInt("selectedEvent", event.getId());
+
+        eventDetailsFragment.setArguments(bundle);
+
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.nav_host_fragment_activity_main, eventDetailsFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

@@ -16,23 +16,31 @@ import it.rizzoli.eattogether.database.entity.Event;
 public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewHolder> {
 
     private List<Event> eventsList;
+    private OnItemClickListener onItemClickListener;
 
-    public EventsAdapter(List<Event> events) {
+    public EventsAdapter(List<Event> events, OnItemClickListener onItemClickListener) {
         this.eventsList = events;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.item_event_box, parent, false);
+                .inflate(R.layout.item_event_box, parent, false);
         return new EventViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
-        String eventName = eventsList.get(position).getNome();
-        holder.eventNameTextView.setText(eventName);
+        Event event = eventsList.get(position);
+        holder.eventNameTextView.setText(event.getNome());
+
+        holder.itemView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(event);
+            }
+        });
     }
 
     @Override
@@ -48,5 +56,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventViewH
             eventNameTextView = itemView.findViewById(R.id.event_name);
         }
     }
-}
 
+    public interface OnItemClickListener {
+        void onItemClick(Event event);
+    }
+}

@@ -141,6 +141,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return events;
     }
+    public Event getEventById(int eventId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("events", null, "_id = ?", new String[]{String.valueOf(eventId)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            Event event = Event.fromCursor(cursor);
+            cursor.close();
+            return event;
+        }
+        return null;
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -177,8 +188,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
 
 }
