@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -21,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     EditText username;
     Button login;
-    Button signup;
+    TextView signup;
 
 
     @Override
