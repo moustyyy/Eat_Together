@@ -12,14 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
 import it.rizzoli.eattogether.R;
 import it.rizzoli.eattogether.database.DatabaseHelper;
-import it.rizzoli.eattogether.database.UserDbAdapter;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -61,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
                         toast.show();
                     } else {
                         ContentValues values = new ContentValues();
-                        values.put("usernane", username.getText().toString());
+                        values.put("username", username.getText().toString());
                         values.put("password", password.getText().toString());
                         db.insert("Users", null, values);
                         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs",

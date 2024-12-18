@@ -17,9 +17,7 @@ import java.io.File;
 import java.util.Objects;
 
 import it.rizzoli.eattogether.database.DatabaseHelper;
-import it.rizzoli.eattogether.database.UserDbAdapter;
 import it.rizzoli.eattogether.R;
-import it.rizzoli.eattogether.ui.home.HomeFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
