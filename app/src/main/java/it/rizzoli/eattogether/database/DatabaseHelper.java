@@ -1,9 +1,16 @@
 package it.rizzoli.eattogether.database;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -114,6 +121,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    public List<String> getEventNames() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<String> eventNames = new ArrayList<>();
+
+        String query = "SELECT nome FROM Events";
+        try (Cursor cursor = db.rawQuery(query, null)) {
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    @SuppressLint("Range")
+                    String eventName = cursor.getString(cursor.getColumnIndex("nome"));
+                    eventNames.add(eventName);
+                } while (cursor.moveToNext());
+            }
+        } catch (SQLException e) {
+            Log.d("SQL Error getEventNames: ", Objects.requireNonNull(e.getMessage()));
+        }
+        return eventNames;
+    }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("DATABASE", "onCreate chiamato");
@@ -132,7 +158,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_COMPLEXFOOD_FOOD_TABLE);
 
         String INSERT_USER = "INSERT INTO Users (username, password) VALUES (?, ?);";
-        db.execSQL(INSERT_USER,  new Object[]{"admin", "admin"});
+        db.execSQL(INSERT_USER, new Object[]{"admin", "admin"});
+
         String INSERT_EVENT_1 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
         db.execSQL(INSERT_EVENT_1,  new Object[]{"1", "nome_evento_1", "2024-12-20", "18:00:00", "Via Roma 123",
@@ -148,5 +175,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+
+
 }
