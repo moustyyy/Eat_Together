@@ -84,7 +84,7 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
                 eventName.setText(event.getNome());
                 eventDate.setText(event.getData());
                 eventOrganizer.setText(username);
-                eventTime.setText(event.getOra());
+                eventTime.setText(event.getOra().substring(0, 5));
                 eventDescription.setText(event.getDescrizione());
                 eventAddress.setText(event.getIndirizzo() + ", " + event.getCitta());
             }
