@@ -17,4 +17,7 @@
     <string name="log_out">Log Out</string>
     <string name="settings">settings</string>
     <string name="empty_fields">empty fields</string>
+    <string name="profile_image">profile image</string>
+    <string name="fullname">name surname</string>
+    <string name="edit_profile">Edit profile</string>
 </resources>
