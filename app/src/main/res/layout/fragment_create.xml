@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Creazione evento"
+            android:text="Create Event"
             android:textColor="@color/txt_darkmode"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -35,11 +35,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Upload IMAGE"
+                android:textAllCaps="false"
+                android:text="Upload Image"
                 android:drawablePadding="10dp"
                 android:background="@android:color/transparent"
                 android:textSize="18sp"
-                android:textStyle="bold"
                 android:textColor="@color/txt_placeholder"
                 android:drawableRight="@drawable/ic_upload"/>
             <ImageView
@@ -64,7 +64,73 @@
             android:paddingLeft="10dp"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text"
-            android:hint="Titolo"/>
+            android:hint="Title"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_dark_2"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/data"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColorHint="@color/txt_placeholder"
+                    android:textColor="@color/txt_darkmode"
+                    android:textSize="18sp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Date"/>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/calendar_days_svgrepo_com"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_dark_2"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/ora"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColorHint="@color/txt_placeholder"
+                    android:textColor="@color/txt_darkmode"
+                    android:textSize="18sp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="13dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Time"/>
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/clock_two_svgrepo_com"
+                    android:layout_marginRight="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
 
         <EditText
             android:layout_width="match_parent"
@@ -80,7 +146,7 @@
             android:paddingLeft="10dp"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text"
-            android:hint="Data"/>
+            android:hint="Address"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -96,7 +162,7 @@
             android:paddingLeft="10dp"
             android:fontFamily="@font/poppins_regular"
             android:inputType="text"
-            android:hint="Indirizzo"/>
+            android:hint="City"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -112,9 +178,9 @@
             android:paddingLeft="10dp"
             android:fontFamily="@font/poppins_regular"
             android:inputType="textMultiLine"
-            android:hint="Descrizione"
+            android:hint="Description"
             android:gravity="top"
-            android:lines="3"
+            android:lines="2"
             />
 
         <Button
@@ -123,7 +189,7 @@
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/primary"
             android:fontFamily="@font/poppins_regular"
-            android:text="CREA"
+            android:text="create"
             android:textSize="18sp"
             android:padding="12dp"
             android:textStyle="bold" />

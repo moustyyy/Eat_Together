@@ -38,11 +38,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "idUserCreator INTEGER NOT NULL, " +
                     "nome TEXT NOT NULL, " +
-                    "data DATE NOT NULL, " +
-                    "ora TIME NOT NULL, " +
+                    "data DATE, " +
+                    "ora TIME, " +
                     "indirizzo TEXT, " +
                     "citta TEXT, " +
                     "descrizione TEXT, " +
+                    "image BLOB, " +
                     "FOREIGN KEY (idUserCreator) REFERENCES Users(id));";
 
     private static final String CREATE_EVENT_USER_TABLE =
