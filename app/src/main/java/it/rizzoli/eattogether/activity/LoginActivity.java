@@ -20,12 +20,10 @@ import it.rizzoli.eattogether.ui.home.HomeFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private UserDbAdapter dbUser;
     EditText password;
     EditText username;
     Button login;
     TextView signup;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
 
         DatabaseHelper dbHelper =  new DatabaseHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        dbUser = new UserDbAdapter(this);
 
 
         login.setOnClickListener(view -> {
@@ -80,4 +77,3 @@ public class LoginActivity extends AppCompatActivity {
                 || password.getText().toString().equals(""));
     }
 }
-

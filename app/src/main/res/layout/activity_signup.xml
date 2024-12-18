@@ -1,153 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/register"
     android:layout_width="match_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
     android:background="@color/bg_dark"
     android:orientation="vertical"
-    tools:context=".activity.SignUpActivity"
-    tools:ignore="ExtraText">
+    tools:context=".activity.SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        >
+        android:paddingHorizontal="20dp">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_launcher" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:inputType="text"
+            android:background="@color/bg_dark_2"
+            android:textColor="@color/txt_darkmode"
+            android:textColorHint="@color/txt_placeholder"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/username"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:background="@color/bg_dark_2"
+            android:textColor="@color/txt_darkmode"
+            android:textColorHint="@color/txt_placeholder"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/password"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/passwordConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:background="@color/bg_dark_2"
+            android:textColor="@color/txt_darkmode"
+            android:textColorHint="@color/txt_placeholder"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/confirm_password"
+            android:paddingTop="13dp"
+            android:paddingBottom="13dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/sign_up"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/errorFill"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/empty_fields"
-            android:textSize="20sp"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/red"
-            android:visibility="gone"/>
-        <TextView
-            android:id="@+id/errorUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/user_already_exists"
-            android:textSize="20sp"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/red"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/errorPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/password_must_match"
-            android:textSize="20sp"
-            android:layout_marginTop="25dp"
-            android:textColor="@color/red"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/formLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:orientation="vertical">
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/username"
-                android:textColorHint="@color/txt_placeholder"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_regular"
-                android:background="@color/bg_dark_2"
-                android:padding="10dp"
-                android:autofillHints="username"
-                android:textColor="@color/txt_darkmode"
-                android:inputType="text"/>
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/password"
-                android:textColorHint="@color/txt_placeholder"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_regular"
-                android:background="@color/bg_dark_2"
-                android:padding="10dp"
-                android:inputType="textPassword"
-                android:textColor="@color/txt_darkmode"
-                android:autofillHints="password"/>
-
-            <EditText
-                android:id="@+id/passwordConfirm"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/confirm_password"
-                android:textColorHint="@color/txt_placeholder"
-                android:textSize="20sp"
-                android:fontFamily="@font/poppins_regular"
-                android:background="@color/bg_dark_2"
-                android:padding="10dp"
-                android:inputType="textPassword"
-                android:textColor="@color/txt_darkmode"
-                android:autofillHints="password"/>
-            <Button
-                android:id="@+id/signup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/primary"
-                android:fontFamily="@font/poppins_regular"
-                android:text="@string/sign_up"
-                android:textSize="18sp"
-                android:padding="12dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="30dp">
-
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/already_have_any_account"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/already_have_an_account"
                 android:textColor="@color/txt_darkmode"
-                android:fontFamily="@font/poppins_regular"/>
-            <Button
-                android:id="@+id/signin"
+                tools:ignore="TextContrastCheck"
+                android:textSize="15sp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:id="@+id/login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/primary"
                 android:background="@android:color/transparent"
-                android:padding="5dp"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="17sp"
                 android:text="@string/log_in"
-                android:fontFamily="@font/poppins_regular"/>
+                android:textStyle="bold"
+                android:textColor="@color/primary"/>
 
         </LinearLayout>
     </LinearLayout>

@@ -86,7 +86,7 @@
             <TextView
                 android:id="@+id/signup"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="17sp"
@@ -96,5 +96,4 @@
 
         </LinearLayout>
     </LinearLayout>
-
 </FrameLayout>
