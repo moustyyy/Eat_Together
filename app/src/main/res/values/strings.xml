@@ -7,12 +7,12 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="log_in">log in</string>
-    <string name="don_t_have_an_account">don\'t have an account</string>
-    <string name="sign_up">sign up\n</string>
+    <string name="don_t_have_an_account">don\'t have an account ?</string>
+    <string name="sign_up">sign up</string>
     <string name="user_already_exists">User already exits</string>
     <string name="password_must_match">passwords must match</string>
     <string name="confirm_password">confirm_password</string>
-    <string name="already_have_any_account">already_have_any_account</string>
+    <string name="already_have_any_account">already have any account ?</string>
     <string name="logo">logo</string>
     <string name="log_out">Log Out</string>
     <string name="settings">settings</string>
