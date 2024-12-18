@@ -16,8 +16,20 @@ public class Event implements Parcelable {
     private String indirizzo;
     private String citta;
     private String descrizione;
+    private byte[] img;
 
     public Event() {
+    }
+
+    public Event(int idUserCreator, String nome, String data, String ora, String indirizzo, String citta, String descrizione, byte[] img) {
+        this.idUserCreator = idUserCreator;
+        this.nome = nome;
+        this.data = data;
+        this.ora = ora;
+        this.indirizzo = indirizzo;
+        this.citta = citta;
+        this.descrizione = descrizione;
+        this.img = img;
     }
 
     public Event(int idUserCreator, String nome, String data, String ora, String indirizzo, String citta, String descrizione) {
@@ -95,7 +107,7 @@ public class Event implements Parcelable {
         this.descrizione = descrizione;
     }
 
-    public ContentValues toContentValues() {
+    public ContentValues toContentValuesNoImg() {
         ContentValues values = new ContentValues();
         values.put("idUserCreator", idUserCreator);
         values.put("nome", nome);
@@ -104,6 +116,19 @@ public class Event implements Parcelable {
         values.put("indirizzo", indirizzo);
         values.put("citta", citta);
         values.put("descrizione", descrizione);
+        return values;
+    }
+
+    public ContentValues toContentValuesWithImg() {
+        ContentValues values = new ContentValues();
+        values.put("idUserCreator", idUserCreator);
+        values.put("nome", nome);
+        values.put("data", data);
+        values.put("ora", ora);
+        values.put("indirizzo", indirizzo);
+        values.put("citta", citta);
+        values.put("descrizione", descrizione);
+        values.put("image", img);
         return values;
     }
 
