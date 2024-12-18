@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.rizzoli.eattogether.database.entity.Event;
+import it.rizzoli.eattogether.database.entity.FoodBox;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -78,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<Event> events = new ArrayList<>();
 
         String sql = "SELECT * FROM Events WHERE idUserCreator = ?";
-        String[] selectionArgs = new String[] { "1" };
+        String[] selectionArgs = new String[]{"1"};
         Cursor c = db.rawQuery(sql, selectionArgs);
 
         if (c != null && c.moveToFirst()) {
@@ -90,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return events;
     }
+
     public Event getEventById(int eventId) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("events", null, "_id = ?", new String[]{String.valueOf(eventId)}, null, null, null);
@@ -118,64 +120,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String INSERT_EVENT_1 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.execSQL(INSERT_EVENT_1,  new Object[]{"1", "nome_evento_1", "2024-12-20", "18:00:00", "Via Roma 123",
+        db.execSQL(INSERT_EVENT_1, new Object[]{"1", "nome_evento_1", "2024-12-20", "18:00:00", "Via Roma 123",
                 "Milano", "Descrizione dell'evento_1"});
         String INSERT_EVENT_2 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.execSQL(INSERT_EVENT_2,  new Object[]{"1", "nome_evento_2", "2024-12-22", "20:00:00", "Via Roma 123",
+        db.execSQL(INSERT_EVENT_2, new Object[]{"1", "nome_evento_2", "2024-12-22", "20:00:00", "Via Roma 123",
                 "Milano", "Descrizione dell'evento_2"});
         String INSERT_EVENT_3 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.execSQL(INSERT_EVENT_3,  new Object[]{"1", "nome_evento_3", "2024-12-25", "21:00:00", "Via Roma 123",
+        db.execSQL(INSERT_EVENT_3, new Object[]{"1", "nome_evento_3", "2024-12-25", "21:00:00", "Via Roma 123",
                 "Milano", "Descrizione dell'evento_3"});
+
+        String insertFood1 = "INSERT INTO Foods (nome) VALUES ('Pizza');";
+        String insertFood2 = "INSERT INTO Foods (nome) VALUES ('Pasta');";
+        String insertFood3 = "INSERT INTO Foods (nome) VALUES ('Salad');";
+
+        db.execSQL(insertFood1);
+        db.execSQL(insertFood2);
+        db.execSQL(insertFood3);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
-    public List<String> getFoodItemsForEvent(int eventId) {
-            SQLiteDatabase db = this.getReadableDatabase();
-            List<String> foodItems = new ArrayList<>();
-
-            String sql = "SELECT Foods.nome FROM Foods " +
-                    "INNER JOIN Food_FoodBox ON Foods._id = Food_FoodBox.idFood " +
-                    "INNER JOIN Food_Boxes ON Food_FoodBox.idFoodBox = Food_Boxes._id " +
-                    "WHERE Food_Boxes.idEvent = ?";
-
-            Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(eventId)});
-
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    @SuppressLint("Range") String foodName = cursor.getString(cursor.getColumnIndex("nome"));
-                    foodItems.add(foodName);
-                } while (cursor.moveToNext());
-                cursor.close();
-            }
-
-            return foodItems;
-    }
-
-    public List<String> getFoodBoxesForEvent(int eventId) {
+    public List<FoodBox> getFoodBoxesForEvent(int eventId) {
         SQLiteDatabase db = this.getReadableDatabase();
-        List<String> foodBoxNames = new ArrayList<>();
+        List<FoodBox> foodBoxes = new ArrayList<>();
 
-        String sql = "SELECT Food_Boxes.nome FROM Food_Boxes " +
-                "INNER JOIN Events ON Food_Boxes.idEvent = Events._id " +
-                "WHERE Events._id = ?";
+        String sql = "SELECT * FROM Food_Boxes WHERE idEvent = ?";
 
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(eventId)});
 
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 @SuppressLint("Range")
-                String foodBoxName = cursor.getString(cursor.getColumnIndex("nome"));
-                foodBoxNames.add(foodBoxName);
+                FoodBox foodBox = new FoodBox(cursor.getInt(cursor.getColumnIndex("_id")),
+                        cursor.getInt(cursor.getColumnIndex("idUserAdder")),
+                        cursor.getInt(cursor.getColumnIndex("idEvent")),
+                        cursor.getString(cursor.getColumnIndex("nome")),
+                        cursor.getString(cursor.getColumnIndex("descrizione")));
+                foodBoxes.add(foodBox);
             } while (cursor.moveToNext());
             cursor.close();
         }
 
-        return foodBoxNames;
+        return foodBoxes;
     }
 
     public List<String> getFoodItemsForFoodBox(int foodBoxId) {
@@ -202,33 +192,58 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertSampleFoodItemsForEvent(int eventId) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String insertFood1 = "INSERT INTO Foods (nome) VALUES ('Pizza');";
-        String insertFood2 = "INSERT INTO Foods (nome) VALUES ('Pasta');";
-        String insertFood3 = "INSERT INTO Foods (nome) VALUES ('Salad');";
-
-        db.execSQL(insertFood1);
-        db.execSQL(insertFood2);
-        db.execSQL(insertFood3);
-
         String insertFoodBox = "INSERT INTO Food_Boxes (idEvent, idUserAdder, nome, descrizione) VALUES (?, ?, ?, ?);";
         db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
-        db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
-        db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
 
-        Cursor cursor = db.rawQuery("SELECT last_insert_rowid()", null);
-        int foodBoxId = -1;
-        if (cursor != null && cursor.moveToFirst()) {
-            foodBoxId = cursor.getInt(0);
-            cursor.close();
-        }
-
-        String insertFoodFoodBox1 = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
-        String insertFoodFoodBox2 = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
-        String insertFoodFoodBox3 = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
-
-        db.execSQL(insertFoodFoodBox1, new Object[]{foodBoxId, 1});  // Pizza (foodId = 1)
-        db.execSQL(insertFoodFoodBox2, new Object[]{foodBoxId, 2});  // Pasta (foodId = 2)
-        db.execSQL(insertFoodFoodBox3, new Object[]{foodBoxId, 3});  // Salad (foodId = 3)
     }
 
+    public List<String> getFoodNamesByFoodBox(int foodBoxId) {
+        List<String> foodItems = getFoodItemsForFoodBox(foodBoxId);
+        List<String> foodItemsToShow = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        StringBuilder placeholders = new StringBuilder();
+        for (int i = 0; i < foodItems.size(); i++) {
+            placeholders.append("?");
+            if (i < foodItems.size() - 1) {
+                placeholders.append(", ");
+            }
+        }
+
+        System.out.println("placeholder" + placeholders);
+
+        String sql = "SELECT * FROM Foods WHERE nome NOT IN (" + placeholders + ")";
+
+        Cursor cursor = db.rawQuery(sql, foodItems.toArray(new String[0]));
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                @SuppressLint("Range") String foodName = cursor.getString(cursor.getColumnIndex("nome"));
+                foodItemsToShow.add(foodName);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        return foodItemsToShow;
+    }
+
+    @SuppressLint("Range")
+    public int getFoodIdByFoodName(String foodName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT * FROM Foods WHERE nome = ?";
+        Cursor cursor = db.rawQuery(sql, new String[] {foodName});
+
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                return cursor.getInt(cursor.getColumnIndex("_id"));
+            } while (cursor.moveToNext());
+        };
+        return -1;
+    }
+
+    public boolean addFoodToFoodBox(int foodBoxId, String foodId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String insertFoodFoodBox = "INSERT INTO Food_FoodBox (idFoodBox, idFood) VALUES (?, ?);";
+        db.execSQL(insertFoodFoodBox, new Object[]{foodBoxId, foodId});
+
+        return true;
+    }
 }

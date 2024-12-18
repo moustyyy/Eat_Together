@@ -24,7 +24,8 @@ import it.rizzoli.eattogether.database.entity.Event;
 
 import android.widget.ListView;
 
-import it.rizzoli.eattogether.ui.food_boox.FragmentFoodBox;
+import it.rizzoli.eattogether.database.entity.FoodBox;
+import it.rizzoli.eattogether.ui.food_box.FoodBoxFragment;
 
 
 public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTransactionListener {
@@ -54,12 +55,12 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
         if (bundle != null) {
             int eventId = bundle.getInt("selectedEvent", 1);
 
-            List<String> existingFoodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
+            List<FoodBox> existingFoodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
             if (existingFoodBoxes == null || existingFoodBoxes.isEmpty()) {
                 databaseHelper.insertSampleFoodItemsForEvent(eventId);
             }
 
-            List<String> foodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
+            List<FoodBox> foodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
 
             if (foodBoxes != null && !foodBoxes.isEmpty()) {
                 FoodBoxAdapter foodBoxAdapter = new FoodBoxAdapter(getContext(), foodBoxes, this);
@@ -84,7 +85,7 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
                 eventName.setText(event.getNome());
                 eventDate.setText(event.getData());
                 eventOrganizer.setText(username);
-                eventTime.setText(event.getOra().substring(0, 5));
+                eventTime.setText(event.getOra().substring(0,5));
                 eventDescription.setText(event.getDescrizione());
                 eventAddress.setText(event.getIndirizzo() + ", " + event.getCitta());
             }
@@ -94,7 +95,7 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
     }
 
     @Override
-    public void onFoodBoxClick(FragmentFoodBox fragmentFoodBox) {
+    public void onFoodBoxClick(FoodBoxFragment fragmentFoodBox) {
         if (getActivity() != null) {
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.nav_host_fragment_activity_main, fragmentFoodBox)
@@ -103,6 +104,3 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
         }
     }
 }
-
-
-

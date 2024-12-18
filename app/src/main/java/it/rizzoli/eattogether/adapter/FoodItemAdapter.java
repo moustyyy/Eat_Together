@@ -49,4 +49,3 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.FoodIt
         }
     }
 }
-
