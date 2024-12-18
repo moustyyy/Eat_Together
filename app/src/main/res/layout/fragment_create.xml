@@ -27,7 +27,8 @@
             android:textStyle="bold"
             android:layout_marginTop="20dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            tools:ignore="HardcodedText" />
 
         <!-- Button per selezionare la foto -->
         <EditText
@@ -35,12 +36,13 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginBottom="20dp"
-            android:background="@color/bg_dark_2"
+            android:background="@color/black"
             android:drawableStart="@drawable/ic_upload_here"
             android:drawablePadding="10dp"
             android:padding="15dp"
             android:text="Carica foto"
-            android:textColor="@color/txt_placeholder" />
+            android:textColor="@color/txt_placeholder"
+            tools:ignore="HardcodedText" />
 
         <!-- Titolo -->
         <TextView
@@ -49,7 +51,8 @@
             android:layout_height="wrap_content"
             android:text="Titolo"
             android:textColor="@color/txt_darkmode"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/titleInput"
@@ -60,7 +63,8 @@
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:background="@color/bg_dark_2"
-            android:padding="10dp"/>
+            android:padding="10dp"
+            tools:ignore="HardcodedText" />
 
         <!-- Data -->
         <TextView
@@ -70,7 +74,8 @@
             android:text="Data"
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            tools:ignore="HardcodedText" />
 
         <EditText
             android:id="@+id/dateInput"
@@ -85,7 +90,7 @@
             android:focusable="false"
             android:clickable="true"
             android:inputType="none"
-            tools:ignore="TextFields" />
+            tools:ignore="HardcodedText,TextFields" />
 
         <!-- Indirizzo -->
         <TextView
@@ -96,7 +101,7 @@
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
-            tools:ignore="DuplicateIds" />
+            tools:ignore="DuplicateIds,HardcodedText" />
 
         <EditText
             android:id="@+id/addressInput"
@@ -108,7 +113,7 @@
             android:textSize="18sp"
             android:background="@color/bg_dark_2"
             android:padding="10dp"
-            tools:ignore="DuplicateIds" />
+            tools:ignore="DuplicateIds,HardcodedText" />
 
         <!-- Descrizione -->
         <TextView
@@ -119,7 +124,7 @@
             android:textColor="@color/txt_darkmode"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
-            tools:ignore="DuplicateIds" />
+            tools:ignore="DuplicateIds,HardcodedText" />
 
         <EditText
             android:id="@+id/descriptionInput"
@@ -133,7 +138,7 @@
             android:padding="10dp"
             android:lines="4"
             android:gravity="top|start"
-            tools:ignore="DuplicateIds" />
+            tools:ignore="DuplicateIds,HardcodedText" />
 
     </LinearLayout>
 
@@ -144,7 +149,8 @@
         android:orientation="horizontal"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="30dp"
-        android:paddingEnd="20dp">
+        android:paddingEnd="20dp"
+        tools:ignore="RtlSymmetry">
 
         <Button
             android:id="@+id/createButton"
@@ -153,9 +159,10 @@
             android:backgroundTint="@color/primary"
             android:text="Crea"
             android:textColor="@color/txt_darkmode"
-            android:drawableRight="@drawable/ic_upload"
+            android:drawableEnd="@drawable/ic_upload"
             android:drawablePadding="10dp"
-            android:padding="15dp"/>
+            android:padding="15dp"
+            tools:ignore="HardcodedText" />
 
     </LinearLayout>
 
