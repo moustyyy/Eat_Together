@@ -21,7 +21,7 @@
     <string name="fullname">username</string>
     <string name="edit_profile">Edit profile</string>
     <string name="event_name">Event Name</string>
-    <string name="created_by">Created by:</string>
+    <string name="created_by">Organizer:</string>
     <string name="food_label">Food</string>
     <string name="event_date">01/01/2025</string>
     <string name="event_user_creator">User Creator\n</string>
