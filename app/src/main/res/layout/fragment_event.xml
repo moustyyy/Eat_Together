@@ -57,7 +57,7 @@
                 android:textColor="@color/txt_darkmode"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16sp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:id="@+id/eventOrganizer"
@@ -87,7 +87,7 @@
                 android:textColor="@color/txt_darkmode"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16sp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:id="@+id/eventDate"
@@ -117,7 +117,7 @@
                 android:textColor="@color/txt_darkmode"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16sp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:id="@+id/eventTime"
@@ -147,7 +147,7 @@
                 android:textColor="@color/txt_darkmode"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16sp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:id="@+id/eventAddress"
@@ -175,7 +175,7 @@
                 android:textColor="@color/txt_darkmode"
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="16sp"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginRight="10dp"/>
 
             <TextView
                 android:id="@+id/eventDescription"

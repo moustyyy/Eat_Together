@@ -84,7 +84,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_FOOD_FOODBOX_TABLE);
 
         String[][] users = {
-                {"admin", "admin"}
+                {"admin", "admin"},
+                {"guest", "guest"}
         };
 
         String insertUserQuery = "INSERT INTO Users (username, password) VALUES (?, ?);";
@@ -96,7 +97,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[][] events = {
                 {"1", "Cena di Natale", "2024-12-20", "20:00:00", "Piazza del Duomo 1", "Milano", "Un incontro conviviale per celebrare il Natale con amici e famiglia."},
                 {"1", "Festa di Capodanno", "2024-12-31", "22:00:00", "Viale dei Mille 10", "Roma", "Un'esplosiva festa per dare il benvenuto al nuovo anno!"},
-                {"1", "Picnic al Parco", "2025-05-10", "12:00:00", "Parco Sempione", "Milano", "Una giornata di relax all'aria aperta, con picnic e giochi all'aperto."}
+                {"2", "Picnic al Parco", "2025-05-10", "12:00:00", "Parco Sempione", "Milano", "Una giornata di relax all'aria aperta, con picnic e giochi all'aperto."},
+                {"2", "Concerto d'Estate", "2025-07-15", "21:00:00", "Arena di Verona", "Verona", "Un'esperienza musicale indimenticabile sotto le stelle."},
+                {"2", "Festival del Cinema", "2025-09-10", "18:30:00", "Teatro La Fenice", "Venezia", "Proiezioni esclusive e incontri con celebrità del mondo del cinema."}
         };
 
         String INSERT_EVENT = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -117,9 +120,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String[][] foodBoxes = {
                 {"1", "1", "Box 1", "Food box for event " + 1},
-                {"1", "1", "Box 2", "Food box for event " + 1},
-                {"1", "2", "Box 3", "Food box for event " + 3},
-                {"1", "3", "Box 4", "Food box for event " + 3}
+                {"2", "1", "Box 2", "Food box for event " + 1},
+                {"1", "2", "Box 3", "Food box for event " + 2},
+                {"2", "3", "Box 4", "Food box for event " + 3},
+                {"2", "4", "Box 5", "Food box for event " + 4},
+                {"2", "5", "Box 6", "Food box for event " + 5},
+                {"2", "5", "Box 7", "Food box for event " + 5}
+
         };
 
         String insertFoodBox = "INSERT INTO Food_Boxes (idUserAdder, idEvent, nome, descrizione) VALUES (?, ?, ?, ?);";
@@ -128,24 +135,53 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL(insertFoodBox, foodBox);
         }
 
+        String[][] eventUsers = {
+                {"3", "1"},
+                {"1", "2"},
+                {"2", "2"}
+        };
+
+        String insertEventUserQuery = "INSERT INTO Event_User (idEvent, idUser) VALUES (?, ?);";
+
+        for (String[] eventUser : eventUsers) {
+            db.execSQL(insertEventUserQuery, eventUser);
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     @SuppressLint("Range")
-    public List<Event> getEvents() {
+    public List<Event> getEvents(int userId) {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Event> events = new ArrayList<>();
 
         String sql = "SELECT * FROM Events WHERE idUserCreator = ?";
-        String[] selectionArgs = new String[]{"1"};
+        String[] selectionArgs = new String[]{String.valueOf(userId)};
         Cursor c = db.rawQuery(sql, selectionArgs);
 
         if (c != null && c.moveToFirst()) {
             do {
                 Event event = Event.fromCursor(c);
                 event.setImg(c.getBlob(c.getColumnIndex("image")));
+                event.setRole("Organizer");
+                events.add(event);
+            } while (c.moveToNext());
+            c.close();
+        }
+
+        sql = "SELECT Events.* FROM Events " +
+                "INNER JOIN Event_User ON Events._id = Event_User.idEvent " +
+                "INNER JOIN Users ON Event_User.idUser = Users._id " +
+                "WHERE Users._id = ?";
+
+        c = db.rawQuery(sql, new String[]{ "1" });
+
+        if (c != null && c.moveToFirst()) {
+            do {
+                Event event = Event.fromCursor(c);
+                event.setImg(c.getBlob(c.getColumnIndex("image")));
+                event.setRole("Guest");
                 events.add(event);
             } while (c.moveToNext());
             c.close();
@@ -164,6 +200,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return event;
         }
         return null;
+    }
+
+    public boolean checkInvitation(Event event, int userId) {
+        boolean check = false;
+        for (Event e : getEvents(userId)) {
+            if(e.getId() == event.getId()) {
+                check = true;
+            }
+        }
+        return check;
     }
 
     public List<FoodBox> getFoodBoxesForEvent(int eventId) {

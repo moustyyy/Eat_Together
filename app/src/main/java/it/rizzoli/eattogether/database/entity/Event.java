@@ -17,6 +17,7 @@ public class Event implements Parcelable {
     private String citta;
     private String descrizione;
     private byte[] img;
+    private String role;
 
     public Event() {
     }
@@ -41,6 +42,14 @@ public class Event implements Parcelable {
         this.citta = citta;
         this.descrizione = descrizione;
         this.img = null;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     // Getters e setters per ciascun campo

@@ -13,13 +13,30 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/bg_dark_2">
-
         <!-- Event box content -->
         <FrameLayout
             android:id="@+id/uploadPhotoInput"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@color/primary">
+            <TextView
+                android:id="@+id/event_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="Role"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:layout_marginTop="5dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="10dp"
+                android:textColor="@color/txt_darkmode"
+                android:fontFamily="@font/poppins_regular"
+                android:background="@color/bg_dark_2"
+                />
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"

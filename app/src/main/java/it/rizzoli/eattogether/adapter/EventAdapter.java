@@ -40,6 +40,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         Event event = eventsList.get(position);
         holder.eventNameTextView.setText(event.getNome());
         holder.eventDateTextView.setText(event.getData());
+        holder.eventRoleTextView.setText(event.getRole());
 
         if(event.hasImg()) {
             holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(event.getImg(), 0, event.getImg().length));
@@ -52,6 +53,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         });
     }
 
+    public void updateData(List<Event> newEvents) {
+        // Sostituisce la lista attuale
+        this.eventsList.clear();
+        this.eventsList.addAll(newEvents);
+
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return eventsList.size();
@@ -60,6 +69,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public static class EventViewHolder extends RecyclerView.ViewHolder {
         TextView eventNameTextView;
         TextView eventDateTextView;
+        TextView eventRoleTextView;
         ImageView imageView;
 
 
@@ -68,6 +78,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             imageView = itemView.findViewById(R.id.imageView);
             eventNameTextView = itemView.findViewById(R.id.event_name);
             eventDateTextView = itemView.findViewById(R.id.event_date);
+            eventRoleTextView = itemView.findViewById(R.id.event_role);
         }
     }
 

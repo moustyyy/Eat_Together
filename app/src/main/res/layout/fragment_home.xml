@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
+        android:gravity="start"
         android:padding="20dp">
 
         <TextView
@@ -27,6 +27,17 @@
             android:layout_marginTop="25dp"
             android:id="@+id/recycler_event_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <android.widget.Button
+            android:id="@+id/btnAddEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/bg_dark_2"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
     </LinearLayout>
 </FrameLayout>

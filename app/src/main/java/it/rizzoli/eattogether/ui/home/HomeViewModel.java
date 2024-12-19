@@ -14,13 +14,13 @@ public class HomeViewModel extends ViewModel {
 
     private final DatabaseHelper databaseHelper;
 
-    public HomeViewModel(DatabaseHelper databaseHelper) {
+    public HomeViewModel(DatabaseHelper databaseHelper, int userId) {
         this.databaseHelper = databaseHelper;
-        loadEventNames();
+        loadEvents(userId);
     }
 
-    private void loadEventNames() {
-        List<Event> events = databaseHelper.getEvents();
+    private void loadEvents(int userId) {
+        List<Event> events = databaseHelper.getEvents(userId);
         eventsList.setValue(events);
     }
 
