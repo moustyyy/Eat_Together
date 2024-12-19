@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class FoodBoxFragment extends Fragment {
             List<String> foodItems = databaseHelper.getFoodItemsForFoodBox(foodBoxId);
             FoodItemAdapter adapter = new FoodItemAdapter(getContext(), foodItems);
             if (!(foodItems != null && !foodItems.isEmpty())) {
-                Toast toast = Toast.makeText(rootView.getContext(), "Food Box List is empty", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(rootView.getContext(), "Food Box List is empty", Toast.LENGTH_SHORT);
                 toast.show();
             }
             foodItemsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

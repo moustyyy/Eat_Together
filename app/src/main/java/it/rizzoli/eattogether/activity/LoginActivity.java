@@ -41,14 +41,17 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs",
                 Context.MODE_PRIVATE);
 
+        // Istruzione per effettuare un login automatico all'utente admin
+        // le relazioni tra gli utenti e gli eventi sono state implementate nella classe DatabaseHelper
+        // l'utente principale da cui sono stati effettuati i test durante l'esposizione del proggetto
+        // ha credenziali username = "admin" e password = "admin"
+        /*
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("session", "admin");
-        editor.apply();
+        editor.apply(); */
 
-        ImageUtils imageUtils = new ImageUtils(this);  // 'this' si riferisce al Context dell'Activity
+        ImageUtils imageUtils = new ImageUtils(this);
 
-        // Ottieni il byte array dell'immagine PNG da drawable
-        // Sostituisci 'sfondo' con il nome dell'immagine
         DatabaseHelper dbHelper =  new DatabaseHelper(this);
         byte[] imageBytes = imageUtils.imageToByteArray(R.drawable.cena_natale);
         dbHelper.addToArrayBLOBS(imageBytes);
