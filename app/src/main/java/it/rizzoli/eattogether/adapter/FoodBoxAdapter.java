@@ -58,8 +58,7 @@ public class FoodBoxAdapter extends BaseAdapter {
         DatabaseHelper dbHelper =  new DatabaseHelper(parent.getContext());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         String sql = "SELECT * FROM Users WHERE _id = ?";
-        String[] selectionArgs = new String[] { String.valueOf(foodBoxes.get(position).getIdUserAdder()) };
-        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        Cursor cursor = db.rawQuery(sql, new String[] { String.valueOf(foodBoxes.get(position).getIdUserAdder()) });
 
         if (cursor.moveToFirst()) {
             foodBoxCreator.setText(cursor.getString(cursor.getColumnIndex("username")));

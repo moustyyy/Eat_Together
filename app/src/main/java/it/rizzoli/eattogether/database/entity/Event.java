@@ -40,6 +40,7 @@ public class Event implements Parcelable {
         this.indirizzo = indirizzo;
         this.citta = citta;
         this.descrizione = descrizione;
+        this.img = null;
     }
 
     // Getters e setters per ciascun campo
@@ -105,6 +106,17 @@ public class Event implements Parcelable {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public boolean hasImg() {
+        return this.img != null;
+    }
+    public byte[] getImg() {
+        return img;
+    }
+
+    public void setImg(byte[] img) {
+        this.img = img;
     }
 
     public ContentValues toContentValuesNoImg() {

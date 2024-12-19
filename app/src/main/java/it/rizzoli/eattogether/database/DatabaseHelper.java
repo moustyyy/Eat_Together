@@ -73,9 +73,69 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+
+        db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_EVENT_TABLE);
+        db.execSQL(CREATE_EVENT_USER_TABLE);
+        db.execSQL(CREATE_FOOD_TABLE);
+        db.execSQL(CREATE_FOODBOX_TABLE);
+        db.execSQL(CREATE_FOOD_FOODBOX_TABLE);
+
+        String[][] users = {
+                {"admin", "admin"}
+        };
+
+        String insertUserQuery = "INSERT INTO Users (username, password) VALUES (?, ?);";
+
+        for (String[] user : users) {
+            db.execSQL(insertUserQuery, user);
+        }
+
+        String[][] events = {
+                {"1", "Cena di Natale", "2024-12-20", "20:00:00", "Piazza del Duomo 1", "Milano", "Un incontro conviviale per celebrare il Natale con amici e famiglia."},
+                {"1", "Festa di Capodanno", "2024-12-31", "22:00:00", "Viale dei Mille 10", "Roma", "Un'esplosiva festa per dare il benvenuto al nuovo anno!"},
+                {"1", "Picnic al Parco", "2025-05-10", "12:00:00", "Parco Sempione", "Milano", "Una giornata di relax all'aria aperta, con picnic e giochi all'aperto."}
+        };
+
+        String INSERT_EVENT = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        for (String[] event : events) {
+            db.execSQL(INSERT_EVENT, event);
+        }
+
+        String[] foodNames = {
+                "Pizza", "Pasta", "Salad", "Burger", "Sushi", "Tacos",
+                "Spaghetti", "Ice Cream", "Steak", "Fries", "Sandwich",
+                "Soup", "Risotto", "Lasagna", "Paella"
+        };
+
+        for (String food : foodNames) {
+            String query = "INSERT INTO Foods (nome) VALUES ('" + food + "');";
+            db.execSQL(query);
+        }
+
+        String[][] foodBoxes = {
+                {"1", "1", "Box 1", "Food box for event " + 1},
+                {"1", "1", "Box 2", "Food box for event " + 1},
+                {"1", "2", "Box 3", "Food box for event " + 3},
+                {"1", "3", "Box 4", "Food box for event " + 3}
+        };
+
+        String insertFoodBox = "INSERT INTO Food_Boxes (idUserAdder, idEvent, nome, descrizione) VALUES (?, ?, ?, ?);";
+
+        for (String[] foodBox : foodBoxes) {
+            db.execSQL(insertFoodBox, foodBox);
+        }
+
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
+
+    @SuppressLint("Range")
     public List<Event> getEvents() {
         SQLiteDatabase db = this.getReadableDatabase();
-        List<String> eventNames = new ArrayList<>();
         List<Event> events = new ArrayList<>();
 
         String sql = "SELECT * FROM Events WHERE idUserCreator = ?";
@@ -84,7 +144,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (c != null && c.moveToFirst()) {
             do {
-                events.add(Event.fromCursor(c));
+                Event event = Event.fromCursor(c);
+                event.setImg(c.getBlob(c.getColumnIndex("image")));
+                events.add(event);
             } while (c.moveToNext());
             c.close();
         }
@@ -103,70 +165,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return null;
     }
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        Log.d("DATABASE", "onCreate chiamato");
-
-        db.execSQL(CREATE_USER_TABLE);
-        db.execSQL(CREATE_EVENT_TABLE);
-        db.execSQL(CREATE_EVENT_USER_TABLE);
-        db.execSQL(CREATE_FOOD_TABLE);
-        db.execSQL(CREATE_FOODBOX_TABLE);
-        db.execSQL(CREATE_FOOD_FOODBOX_TABLE);
-
-        String INSERT_USER = "INSERT INTO Users (username, password) VALUES (?, ?);";
-        db.execSQL(INSERT_USER, new Object[]{"admin", "admin"});
-
-        String INSERT_EVENT_1 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.execSQL(INSERT_EVENT_1, new Object[]{"1", "nome_evento_1", "2024-12-20", "18:00:00", "Via Roma 123",
-                "Milano", "Descrizione dell'evento_1"});
-        String INSERT_EVENT_2 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.execSQL(INSERT_EVENT_2, new Object[]{"1", "nome_evento_2", "2024-12-22", "20:00:00", "Via Roma 123",
-                "Milano", "Descrizione dell'evento_2"});
-        String INSERT_EVENT_3 = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        db.execSQL(INSERT_EVENT_3, new Object[]{"1", "nome_evento_3", "2024-12-25", "21:00:00", "Via Roma 123",
-                "Milano", "Descrizione dell'evento_3"});
-
-        String insertFood1 = "INSERT INTO Foods (nome) VALUES ('Pizza');";
-        String insertFood2 = "INSERT INTO Foods (nome) VALUES ('Pasta');";
-        String insertFood3 = "INSERT INTO Foods (nome) VALUES ('Salad');";
-        String insertFood4 = "INSERT INTO Foods (nome) VALUES ('Burger');";
-        String insertFood5 = "INSERT INTO Foods (nome) VALUES ('Sushi');";
-        String insertFood6 = "INSERT INTO Foods (nome) VALUES ('Tacos');";
-        String insertFood7 = "INSERT INTO Foods (nome) VALUES ('Spaghetti');";
-        String insertFood8 = "INSERT INTO Foods (nome) VALUES ('Ice Cream');";
-        String insertFood9 = "INSERT INTO Foods (nome) VALUES ('Steak');";
-        String insertFood10 = "INSERT INTO Foods (nome) VALUES ('Fries');";
-        String insertFood11 = "INSERT INTO Foods (nome) VALUES ('Sandwich');";
-        String insertFood12 = "INSERT INTO Foods (nome) VALUES ('Soup');";
-        String insertFood13 = "INSERT INTO Foods (nome) VALUES ('Risotto');";
-        String insertFood14 = "INSERT INTO Foods (nome) VALUES ('Lasagna');";
-        String insertFood15 = "INSERT INTO Foods (nome) VALUES ('Paella');";
-
-        db.execSQL(insertFood1);
-        db.execSQL(insertFood2);
-        db.execSQL(insertFood3);
-        db.execSQL(insertFood4);
-        db.execSQL(insertFood5);
-        db.execSQL(insertFood6);
-        db.execSQL(insertFood7);
-        db.execSQL(insertFood8);
-        db.execSQL(insertFood9);
-        db.execSQL(insertFood10);
-        db.execSQL(insertFood11);
-        db.execSQL(insertFood12);
-        db.execSQL(insertFood13);
-        db.execSQL(insertFood14);
-        db.execSQL(insertFood15);
-
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
     public List<FoodBox> getFoodBoxesForEvent(int eventId) {
         SQLiteDatabase db = this.getReadableDatabase();

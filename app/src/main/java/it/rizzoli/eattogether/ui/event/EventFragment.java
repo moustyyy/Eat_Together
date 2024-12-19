@@ -55,19 +55,10 @@ public class EventFragment extends Fragment implements FoodBoxAdapter.FragmentTr
         if (bundle != null) {
             int eventId = bundle.getInt("selectedEvent", 1);
 
-            List<FoodBox> existingFoodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
-            if (existingFoodBoxes == null || existingFoodBoxes.isEmpty()) {
-                databaseHelper.insertSampleFoodItemsForEvent(eventId);
-            }
-
             List<FoodBox> foodBoxes = databaseHelper.getFoodBoxesForEvent(eventId);
 
-            if (foodBoxes != null && !foodBoxes.isEmpty()) {
-                FoodBoxAdapter foodBoxAdapter = new FoodBoxAdapter(getContext(), foodBoxes, this);
-                foodBoxListView.setAdapter(foodBoxAdapter);
-            } else {
-                Log.d("EventFragment", "No food boxes available");
-            }
+            FoodBoxAdapter foodBoxAdapter = new FoodBoxAdapter(getContext(), foodBoxes, this);
+            foodBoxListView.setAdapter(foodBoxAdapter);
 
             Event event = databaseHelper.getEventById(eventId);
             String username = "";

@@ -32,8 +32,8 @@ public class HomeFragment extends Fragment {
 
         HomeViewModel homeViewModel = new HomeViewModel(databaseHelper);
 
-        homeViewModel.getEvents().observe(getViewLifecycleOwner(), eventNames -> {
-            eventAdapter = new EventAdapter(eventNames, this::navigateToEventDetails);
+        homeViewModel.getEvents().observe(getViewLifecycleOwner(), events -> {
+            eventAdapter = new EventAdapter(events, this::navigateToEventDetails);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             recyclerView.setAdapter(eventAdapter);
         });
