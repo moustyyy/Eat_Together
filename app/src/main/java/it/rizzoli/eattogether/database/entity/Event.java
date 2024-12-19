@@ -16,13 +16,13 @@ public class Event implements Parcelable {
     private String indirizzo;
     private String citta;
     private String descrizione;
-    private byte[] img;
+    private byte[] image;
     private String role;
 
     public Event() {
     }
 
-    public Event(int idUserCreator, String nome, String data, String ora, String indirizzo, String citta, String descrizione, byte[] img) {
+    public Event(int idUserCreator, String nome, String data, String ora, String indirizzo, String citta, String descrizione, byte[] image) {
         this.idUserCreator = idUserCreator;
         this.nome = nome;
         this.data = data;
@@ -30,7 +30,7 @@ public class Event implements Parcelable {
         this.indirizzo = indirizzo;
         this.citta = citta;
         this.descrizione = descrizione;
-        this.img = img;
+        this.image = image;
     }
 
     public Event(int idUserCreator, String nome, String data, String ora, String indirizzo, String citta, String descrizione) {
@@ -41,7 +41,7 @@ public class Event implements Parcelable {
         this.indirizzo = indirizzo;
         this.citta = citta;
         this.descrizione = descrizione;
-        this.img = null;
+        this.image = null;
     }
 
     public String getRole() {
@@ -117,15 +117,15 @@ public class Event implements Parcelable {
         this.descrizione = descrizione;
     }
 
-    public boolean hasImg() {
-        return this.img != null;
+    public boolean hasImage() {
+        return this.image != null;
     }
-    public byte[] getImg() {
-        return img;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImg(byte[] img) {
-        this.img = img;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     public ContentValues toContentValuesNoImg() {
@@ -149,7 +149,7 @@ public class Event implements Parcelable {
         values.put("indirizzo", indirizzo);
         values.put("citta", citta);
         values.put("descrizione", descrizione);
-        values.put("image", img);
+        values.put("image", image);
         return values;
     }
 

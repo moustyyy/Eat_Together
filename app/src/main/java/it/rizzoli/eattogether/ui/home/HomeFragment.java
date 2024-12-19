@@ -7,7 +7,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +25,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicReference;
 
 import it.rizzoli.eattogether.R;
+import it.rizzoli.eattogether.Utility;
+import it.rizzoli.eattogether.activity.MainActivity;
 import it.rizzoli.eattogether.adapter.EventAdapter;
 import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.database.entity.Event;
@@ -44,6 +58,10 @@ public class HomeFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycler_event_view);
         databaseHelper = new DatabaseHelper(getContext());
         SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        //byte[] imageBytes = imageToByteArray(R.drawable.sfondo);
+
+        //System.out.println(imageBytes);
 
         int id;
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("MyPrefs",

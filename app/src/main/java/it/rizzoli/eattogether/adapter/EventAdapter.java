@@ -11,10 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import it.rizzoli.eattogether.R;
-import it.rizzoli.eattogether.Utility;
 import it.rizzoli.eattogether.database.entity.Event;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
@@ -42,8 +42,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         holder.eventDateTextView.setText(event.getData());
         holder.eventRoleTextView.setText(event.getRole());
 
-        if(event.hasImg()) {
-            holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(event.getImg(), 0, event.getImg().length));
+        if(event.hasImage()) {
+            holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(event.getImage(), 0, event.getImage().length));
         }
 
         holder.itemView.setOnClickListener(v -> {
@@ -81,6 +81,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
             eventRoleTextView = itemView.findViewById(R.id.event_role);
         }
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(Event event);

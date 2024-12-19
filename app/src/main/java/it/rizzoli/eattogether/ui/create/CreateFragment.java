@@ -84,10 +84,6 @@ public class CreateFragment extends Fragment {
                     imageView.setVisibility(View.VISIBLE);
                     selectImage.setVisibility(View.GONE);
 
-                    byte[] imgBLOB = Utility.getBytesFromUri(result, root.getContext());
-
-                    System.out.println(imgBLOB);
-
                 }
             }
         });

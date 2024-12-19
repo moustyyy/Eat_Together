@@ -4,37 +4,24 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
-public class Utility {
-    public static byte[] getBytesFromUri(Uri imageUri, Context context) {
-        try {
-            InputStream inputStream = context.getContentResolver().openInputStream(imageUri);
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+public class ImageUtils {
 
-            byte[] buffer = new byte[1024];
-            int bytesRead;
+    private Context context;
 
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                byteArrayOutputStream.write(buffer, 0, bytesRead);
-            }
-
-            return byteArrayOutputStream.toByteArray();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    // Costruttore che riceve un oggetto Context
+    public ImageUtils(Context context) {
+        this.context = context;
     }
 
-    public static byte[] imageToByteArray(Resources resources, int drawableId) {
+    // Metodo per ottenere un Blob (byte[]) da una risorsa PNG
+    public byte[] imageToByteArray(int drawableId) {
         try {
+            // Ottieni l'oggetto Resources dal Context
+            Resources resources = context.getResources();
+
             // Ottieni un InputStream dalle risorse
             InputStream inputStream = resources.openRawResource(drawableId);
 
@@ -54,5 +41,5 @@ public class Utility {
             return null;
         }
     }
-
 }
+

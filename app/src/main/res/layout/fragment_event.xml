@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@color/purple"
-            android:contentDescription="event image"
-            tools:ignore="HardcodedText" />
+            android:scaleType="centerCrop" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -216,8 +215,19 @@
             <ListView
                 android:id="@+id/foodBoxList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:dividerHeight="10dp"/>
+
+            <android.widget.Button
+                android:id="@+id/btnAddFoodBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@color/bg_dark_2"
+                android:text="+"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
 
         </LinearLayout>
     </LinearLayout>

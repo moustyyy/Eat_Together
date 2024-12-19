@@ -1,12 +1,15 @@
 package it.rizzoli.eattogether.database;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "mydatabase.db";
     private static final int DATABASE_VERSION = 1;
+
+    private static List<byte[]> imagesBLOB = new ArrayList<>();
 
     private static final String CREATE_USER_TABLE =
             "CREATE TABLE Users (" +
@@ -102,9 +107,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 {"2", "Festival del Cinema", "2025-09-10", "18:30:00", "Teatro La Fenice", "Venezia", "Proiezioni esclusive e incontri con celebrità del mondo del cinema."}
         };
 
-        String INSERT_EVENT = "INSERT INTO Events (idUserCreator, nome, data, ora, indirizzo, citta, descrizione) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        ContentValues values = new ContentValues();
+
+        int index = 0;
         for (String[] event : events) {
-            db.execSQL(INSERT_EVENT, event);
+            values.put("idUserCreator", event[0]);
+            values.put("nome", event[1]);
+            values.put("data", event[2]);
+            values.put("ora", event[3]);
+            values.put("indirizzo", event[4]);
+            values.put("citta", event[5]);
+            values.put("descrizione", event[6]);
+            values.put("image", imagesBLOB.get(index));
+
+            db.insert("Events", null, values);
+            index++;
         }
 
         String[] foodNames = {
@@ -148,6 +165,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public static void addToArrayBLOBS(byte[] imageBLOB) {
+        imagesBLOB.add(imageBLOB);
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 
@@ -163,7 +184,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c != null && c.moveToFirst()) {
             do {
                 Event event = Event.fromCursor(c);
-                event.setImg(c.getBlob(c.getColumnIndex("image")));
+                event.setImage(c.getBlob(c.getColumnIndex("image")));
                 event.setRole("Organizer");
                 events.add(event);
             } while (c.moveToNext());
@@ -180,7 +201,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c != null && c.moveToFirst()) {
             do {
                 Event event = Event.fromCursor(c);
-                event.setImg(c.getBlob(c.getColumnIndex("image")));
+                event.setImage(c.getBlob(c.getColumnIndex("image")));
                 event.setRole("Guest");
                 events.add(event);
             } while (c.moveToNext());
@@ -190,16 +211,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return events;
     }
 
+    @SuppressLint("Range")
     public Event getEventById(int eventId) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("events", null, "_id = ?", new String[]{String.valueOf(eventId)}, null, null, null);
 
         if (cursor != null && cursor.moveToFirst()) {
             Event event = Event.fromCursor(cursor);
+            event.setImage(cursor.getBlob(cursor.getColumnIndex("image")));
             cursor.close();
             return event;
         }
         return null;
+    }
+
+    @SuppressLint("Range")
+    public int getIdUserAdderByFoodBoxId(int foodBoxId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query("Food_Boxes", null, "_id = ?", new String[]{String.valueOf(foodBoxId)}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            return cursor.getInt(cursor.getColumnIndex("idUserAdder"));
+        }
+        return -1;
     }
 
     public boolean checkInvitation(Event event, int userId) {
@@ -255,14 +289,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         return foodItems;
-    }
-
-    public void insertSampleFoodItemsForEvent(int eventId) {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        String insertFoodBox = "INSERT INTO Food_Boxes (idEvent, idUserAdder, nome, descrizione) VALUES (?, ?, ?, ?);";
-        db.execSQL(insertFoodBox, new Object[]{eventId, 1, "Box 1", "Food box for event " + eventId});
-
     }
 
     public List<String> getFoodNamesByFoodBox(int foodBoxId) {

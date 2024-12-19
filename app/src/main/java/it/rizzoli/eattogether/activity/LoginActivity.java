@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.Objects;
 
+import it.rizzoli.eattogether.ImageUtils;
 import it.rizzoli.eattogether.database.DatabaseHelper;
 import it.rizzoli.eattogether.R;
 
@@ -44,6 +45,22 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("session", "admin");
         editor.apply();
 
+        ImageUtils imageUtils = new ImageUtils(this);  // 'this' si riferisce al Context dell'Activity
+
+        // Ottieni il byte array dell'immagine PNG da drawable
+        // Sostituisci 'sfondo' con il nome dell'immagine
+        DatabaseHelper dbHelper =  new DatabaseHelper(this);
+        byte[] imageBytes = imageUtils.imageToByteArray(R.drawable.cena_natale);
+        dbHelper.addToArrayBLOBS(imageBytes);
+        imageBytes = imageUtils.imageToByteArray(R.drawable.festa_capodanno);
+        dbHelper.addToArrayBLOBS(imageBytes);
+        imageBytes = imageUtils.imageToByteArray(R.drawable.picnic);
+        dbHelper.addToArrayBLOBS(imageBytes);
+        imageBytes = imageUtils.imageToByteArray(R.drawable.concerto);
+        dbHelper.addToArrayBLOBS(imageBytes);
+        imageBytes = imageUtils.imageToByteArray(R.drawable.cinema);
+        dbHelper.addToArrayBLOBS(imageBytes);
+
         String session = sharedPreferences.getString("session", "notFound");
         if(session.equals("notFound")) {
             password = findViewById(R.id.password);
@@ -51,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
             signup = findViewById(R.id.signup);
             login = findViewById(R.id.login);
 
-            DatabaseHelper dbHelper =  new DatabaseHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
             login.setOnClickListener(view -> {
