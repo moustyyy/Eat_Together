@@ -109,7 +109,6 @@ public class HomeFragment extends Fragment {
                 builder.setPositiveButton("OK", (dialog, which) -> {
                     String code = inputCode.getText().toString().trim();
                     if (!code.isEmpty()) {
-                        //Toast.makeText(getContext(), "Code entered: " + code, Toast.LENGTH_SHORT).show();
                         Event e = databaseHelper.getEventById(Integer.parseInt(code));
                         if(e == null) {
                             Toast toast = Toast.makeText(getContext(), "Invitation code invalid", Toast.LENGTH_LONG);
